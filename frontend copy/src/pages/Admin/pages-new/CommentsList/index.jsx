@@ -136,14 +136,14 @@ export const CommentsList = () => {
             <Controller
               control={control}
               name="feedback"
-              render={(fields) => (
+              render={({field}) => (
                 <TextArea
-                  {...fields}
+                  {...field}
                   className="mr-4 mt-4"
                   placeholder="Enter here"
                   rows="6"
                   onChange={(e) => {
-                    fields.onChange(e);
+                    field.onChange(e);
                     setFeedBack(e.target.value);
                   }}
                 />

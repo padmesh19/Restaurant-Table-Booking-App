@@ -30,6 +30,7 @@ export const OffersList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { hotelOffersList, isListLoading, isLoading } =
     useSelector(hotelSelector);
+    console.log(hotelOffersList);
 
   const data = useMemo(
     () =>

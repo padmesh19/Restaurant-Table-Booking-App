@@ -15,13 +15,15 @@ export const HotelTables = ({ hotelTables, isListLoading, hotelId }) => {
     () => [
       {
         Header: "#",
-        accessor: "serial",
+        accessorKey: "serial",
         className: "serial",
+        id: 'serial',
       },
       {
         Header: "Table Name",
-        accessor: "table_name",
+        accessorKey: "table_name",
         className: "table-name",
+        id: 'table_name',
       },
       {
         Header: "Seat Count",
@@ -30,8 +32,9 @@ export const HotelTables = ({ hotelTables, isListLoading, hotelId }) => {
             <div className="counts-present">{value}</div>
           </div>
         ),
-        accessor: "table_seat_count",
+        accessorKey: "table_seat_count",
         className: "seat-count",
+        id: 'table_seat_count',
       },
 
       {
@@ -41,8 +44,9 @@ export const HotelTables = ({ hotelTables, isListLoading, hotelId }) => {
             {moment(value).format("DD MMM YYYY")}
           </div>
         ),
-        accessor: "table_created_at",
+        accessorKey: "table_created_at",
         className: "table-creation",
+        id: "table_created_at",
       },
     ],
     []
@@ -68,7 +72,7 @@ export const HotelTables = ({ hotelTables, isListLoading, hotelId }) => {
           buttonLabel="Add Booking"
           onButtonClick={() => {
             if (hotelTables.length) {
-              history(`/admin/hotelList/${hotelId}/book-table`, {
+              history(`/customer/${hotelId}/book-table`, {
                 replace: true,
               });
             }

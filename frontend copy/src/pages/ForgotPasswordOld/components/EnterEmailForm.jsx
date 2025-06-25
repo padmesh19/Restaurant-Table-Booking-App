@@ -20,7 +20,7 @@ import {
 } from "../forgotPasswordSlice";
 
 const EnterEmailForm = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   // const {register, errors, handleSubmit} = useForm();
   const dispatch = useDispatch();
   const passwordState = useSelector(forgotPasswordSelector);
@@ -80,7 +80,7 @@ const EnterEmailForm = () => {
               <div>
                 <button
                   className="backbutton"
-                  onClick={() => history.goBack()}
+                  onClick={() => navigate(-1)}
                   style={{
                     marginRight: "8px",
                   }}

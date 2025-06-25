@@ -147,9 +147,9 @@ export const OrganisationForm = ({
             <Controller
               control={control}
               name="state"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={!!errors.state}
                   label="State"
@@ -160,9 +160,9 @@ export const OrganisationForm = ({
             <Controller
               control={control}
               name="district"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={!!errors.district}
                   label="District"
@@ -173,9 +173,9 @@ export const OrganisationForm = ({
             <Controller
               control={control}
               name="restaurantName"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={!!errors.restaurantName}
                   label="Hotel / Restaurant Name"

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 import { Card } from "./Components";
 import { HotelListContainer } from "./elements";
@@ -15,7 +15,7 @@ import { TableSpinner } from "../../components-new/TableSpinner";
 
 export const HotelList = () => {
   const dispatch = useDispatch();
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const { hotelList, isListLoading } = useSelector(userSelector);
 
@@ -57,7 +57,7 @@ export const HotelList = () => {
                 title={item.hotel_name}
                 description={item.address}
                 onClick={() => {
-                  history(`/admin/hotelList/${item.hotel_id}/view`);
+                  navigate(`/customer/${item.hotel_id}/view`);
                 }}
               />
             </div>
@@ -70,6 +70,7 @@ export const HotelList = () => {
           title="No hotels Found!"
         />
       ) : null}
+    <Outlet/>
     </HotelListContainer>
   );
 };

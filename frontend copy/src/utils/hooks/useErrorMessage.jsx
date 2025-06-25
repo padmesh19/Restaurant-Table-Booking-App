@@ -15,6 +15,7 @@ export const useErrorMessage = (
   const [hasServerError, setHasServerError] = useState(false)
 
   useEffect(() => {
+    if(errors){
     const fieldsWithError = Object.keys(errors)
     const firstFieldWithError = fieldsInOrder.find((field) =>
       fieldsWithError.includes(field)
@@ -30,6 +31,7 @@ export const useErrorMessage = (
         setErrorMessage(null)
       }, ERROR_ALERT_DURATION)
     }
+  }
   }, [dispatch, clearServerError, errors, fieldsInOrder])
 
   useEffect(() => {

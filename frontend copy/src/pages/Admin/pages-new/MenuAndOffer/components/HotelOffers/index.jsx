@@ -12,12 +12,14 @@ export const HotelOfferList = ({ hotelOffersList, isListLoading }) => {
     () => [
       {
         Header: "#",
-        accessor: "serial",
+        accessorKey: "serial",
+        id: "serial",
         className: "serial",
       },
       {
         Header: "offer Description",
-        accessor: "offers_description",
+        accessorKey: "offers_description",
+        id: "offers_description",
         className: "table-name",
       },
       {
@@ -27,7 +29,8 @@ export const HotelOfferList = ({ hotelOffersList, isListLoading }) => {
             {moment(value).format("DD MMM YYYY")}
           </div>
         ),
-        accessor: "offers_started_at",
+        accessorKey: "offers_started_at",
+        id: "offers_started_at",
         className: "offer-starts",
       },
       {
@@ -37,7 +40,8 @@ export const HotelOfferList = ({ hotelOffersList, isListLoading }) => {
             {moment(value).format("DD MMM YYYY")}
           </div>
         ),
-        accessor: "offers_finished_at",
+        accessorKey: "offers_finished_at",
+        id: "offers_finished_at",
         className: "offer-ends",
       },
       {
@@ -48,7 +52,8 @@ export const HotelOfferList = ({ hotelOffersList, isListLoading }) => {
           ) : (
             <div className="not-available"> Not Available</div>
           ),
-        accessor: "is_offers_finished",
+        accessorKey: "is_offers_finished",
+        id: "is_offers_finished",
         className: "offer-ends",
       },
     ],

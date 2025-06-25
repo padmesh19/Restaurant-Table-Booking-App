@@ -1,27 +1,26 @@
-/* eslint-disable react/prop-types */
-
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react";
 import {
-  // useFilters,
-  // useGlobalFilter,
-  // usePagination,
-  useReactTable as useTable,
-  // useSortBy,
-} from "@tanstack/react-table"
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 
-import SortIcon from "../../../assets/icons/sortIcon.svg"
-import GlobalFilter from "../GlobalFilter"
-import { Pagination } from "../Pagination"
-import TableColumnFilter from "../TableColumnFilter"
-import { FilterTab } from "../FilterTab"
-import { Button } from "../Button"
+import SortIcon from "../../../assets/icons/sortIcon.svg";
+import GlobalFilter from "../GlobalFilter";
+import { Pagination } from "../Pagination";
+import TableColumnFilter from "../TableColumnFilter";
+import { FilterTab } from "../FilterTab";
+import { Button } from "../Button";
 
 import {
   Table as TableContainer,
   TableBody,
   TableHead,
   TableHeader,
-} from "./styles"
+} from "./styles";
 
 export const Table = ({
   columns,
@@ -32,118 +31,131 @@ export const Table = ({
   isWithoutPagination,
   itemName,
   maxWidth,
-  defaultSorted = [],
   buttonLabel,
   onButtonClick,
   buttonIcon,
   filterTabs = [],
-  hiddenColumns,
+  hiddenColumns = [],
 }) => {
-  const tableInstance = useTable(
-    {
-      columns,
-      data,
-      initialState: {
-        pageIndex: 0,
-        sortBy: defaultSorted,
-      },
-      autoResetPage: false,
-      autoResetFilters: false,
+  const [globalFilter, setGlobalFilter] = useState("");
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
+
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      globalFilter,
+      pagination,
     },
-    // useFilters,
-    // useGlobalFilter,
-    // useSortBy,
-    // usePagination
-  )
+    onPaginationChange: setPagination,
+    onGlobalFilterChange: setGlobalFilter,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
 
   const {
-    canNextPage,
-    canPreviousPage,
-    getTableProps,
-    getTableBodyProps,
-    gotoPage,
-    headerGroups,
+    getHeaderGroups,
+    getRowModel,
+    getState,
     nextPage,
-    page,
-    pageCount,
-    pageOptions,
-    preGlobalFilteredRows,
-    prepareRow,
     previousPage,
-    setFilter,
-    setGlobalFilter,
     setPageSize,
-    state,
-    setAllFilters,
-    state: { pageIndex, pageSize, filters: filtersState },
-    toggleHideColumn,
-  } = tableInstance
+    getPageCount,
+    getCanNextPage,
+    getCanPreviousPage,
+    setColumnFilters,
+    getPrePaginationRowModel,
+    setColumnVisibility
+  } = table;
 
-  const appliedFilters = useRef(null)
+  const { pageIndex, pageSize } = getState().pagination;
+
+  const appliedFilters = useRef([]);
 
   useEffect(() => {
-    appliedFilters.current = filtersState
+    appliedFilters.current = getState().columnFilters;
+
     if (appliedFilters?.current?.length) {
-      setAllFilters(appliedFilters?.current)
+      setColumnFilters(appliedFilters.current);
     } else {
       filters.forEach((filter) => {
         if (!filter.isFilteredManually) {
-          setFilter(filter.column, filter.defaultValue)
+          setColumnFilters((prev) => [
+            ...prev,
+            { id: filter.column, value: filter.defaultValue },
+          ]);
         }
-      })
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filters, setFilter])
+  }, [filters]);
 
   useEffect(() => {
     hiddenColumns?.forEach((hiddenColumn) => {
-      toggleHideColumn(hiddenColumn, true)
+      setColumnVisibility(hiddenColumn, true)
     })
-  }, [hiddenColumns, toggleHideColumn])
+  }, [hiddenColumns, setColumnVisibility])
 
   useEffect(() => {
-    const element = document.querySelector("body")
-    element?.scrollIntoView({
-      behavior: "smooth",
-    })
-  }, [pageIndex])
+    const element = document.querySelector("body");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }, [pageIndex]);
 
   return (
     <>
-      {isWithoutHeader ? null : (
+      {!isWithoutHeader && (
         <TableHeader>
           <div className="item-container">
             {!filterTabs?.length ? (
-              <h5 className="item-count mb-0">{`${preGlobalFilteredRows.length} ${itemName}`}</h5>
+              <h5 className="item-count mb-0">
+                {`${getPrePaginationRowModel().rows.length} ${itemName}`}
+              </h5>
             ) : null}
             {filterTabs.map((filter) => (
-              <div className="filter-tab">
+              <div className="filter-tab" key={filter.column}>
                 <FilterTab
                   column={filter.column}
                   itemName={filter.itemName}
-                  key={filter.column}
-                  onChange={setFilter}
-                  value={filtersState[0]?.value}
+                  onChange={(val) => {
+                    setColumnFilters((prev) =>
+                      prev.map((f) =>
+                        f.id === filter.column ? { ...f, value: val } : f
+                      )
+                    );
+                  }}
+                  value={
+                    getState().columnFilters.find((f) => f.id === filter.column)
+                      ?.value || ""
+                  }
                 />
               </div>
             ))}
           </div>
+
           <div className="filters">
             <div className="filter-container">
               {filters.map((filter) => (
-                <div className="filter">
+                <div className="filter" key={filter.column}>
                   <TableColumnFilter
                     pageIndex={pageIndex}
-                    gotoPage={gotoPage}
+                    gotoPage={(index) =>
+                      setPagination((p) => ({ ...p, pageIndex: index }))
+                    }
                     column={filter.column}
                     data={filter.data}
                     defaultValue={filter.defaultValue}
                     formatOptionLabel={filter.formatOptionLabel}
                     itemName={filter.itemName}
-                    key={filter.column}
                     onChange={(column, value) => {
-                      if (!filter.isFilteredManually) setFilter(column, value)
-                      if (filter.onChange) filter.onChange(value)
+                      if (!filter.isFilteredManually) {
+                        setColumnFilters((prev) => [
+                          ...prev.filter((f) => f.id !== column),
+                          { id: column, value },
+                        ]);
+                      }
+                      if (filter.onChange) filter.onChange(value);
                     }}
                   />
                 </div>
@@ -152,12 +164,14 @@ export const Table = ({
             <div className="search">
               <GlobalFilter
                 pageIndex={pageIndex}
-                gotoPage={gotoPage}
-                globalFilter={state.globalFilter}
+                gotoPage={(index) =>
+                  setPagination((p) => ({ ...p, pageIndex: index }))
+                }
+                globalFilter={globalFilter}
                 setGlobalFilter={setGlobalFilter}
               />
             </div>
-            {buttonLabel && onButtonClick ? (
+            {buttonLabel && onButtonClick && (
               <div className="button-container">
                 <Button
                   icon={buttonIcon || ""}
@@ -167,70 +181,57 @@ export const Table = ({
                   label={buttonLabel}
                 />
               </div>
-            ) : null}
+            )}
           </div>
         </TableHeader>
       )}
-      <TableContainer {...getTableProps()} maxWidth={maxWidth}>
+
+      <TableContainer maxWidth={maxWidth}>
         <TableHead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps([
-                    {
-                      className: column.className,
-                    },
-                  ])}
-                  {...column.getHeaderProps(
-                    column.render("Header").length > 1 &&
-                      isSortedBy &&
-                      column.getSortByToggleProps()
-                  )}
-                >
+          {getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header?.id}>
                   <div className="align-items-center d-flex">
-                    {column.render("Header")}
-                    {column.render("Header").length > 1 && isSortedBy ? (
+                    {flexRender(header.column.columnDef.header, header.getContext())}
+                    {isSortedBy && (
                       <img className="sort-icon" src={SortIcon} alt="sort" />
-                    ) : null}
+                    )}
                   </div>
                 </th>
               ))}
             </tr>
           ))}
         </TableHead>
-        <TableBody {...getTableBodyProps()}>
-          {page.map((row) => {
-            prepareRow(row)
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell, index) => (
-                  <td
-                    {...cell.getCellProps()}
-                    data-label={headerGroups[0]?.headers[index]?.Header}
-                  >
-                    {cell.render("Cell")}
-                  </td>
-                ))}
-              </tr>
-            )
-          })}
+        <TableBody>
+          {getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id} data-label={cell.column.id}>
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </td>
+              ))}
+            </tr>
+          ))}
         </TableBody>
       </TableContainer>
-      {isWithoutPagination ? null : (
+
+      {!isWithoutPagination && (
         <Pagination
-          canNextPage={canNextPage}
-          canPreviousPage={canPreviousPage}
-          gotoPage={gotoPage}
+          canNextPage={getCanNextPage()}
+          canPreviousPage={getCanPreviousPage()}
+          gotoPage={(index) =>
+            setPagination((prev) => ({ ...prev, pageIndex: index }))
+          }
           nextPage={nextPage}
-          pageCount={pageCount}
+          pageCount={getPageCount()}
           pageIndex={pageIndex}
-          pageOptions={pageOptions}
+          pageOptions={table.getPageOptions()}
           pageSize={pageSize}
           previousPage={previousPage}
           setPageSize={setPageSize}
         />
       )}
     </>
-  )
-}
+  );
+};

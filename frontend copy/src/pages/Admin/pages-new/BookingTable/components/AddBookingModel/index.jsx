@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup";
 import PropTypes from "prop-types";
 import { useCallback, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { replace, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import {
   userSelector,
@@ -44,7 +43,7 @@ export const AddBookingModel = ({
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const { control, errors, handleSubmit } = useForm({
+  const { control, formState: { errors }, handleSubmit } = useForm({
     defaultValues: {
       startDate: new Date(),
       startTime: "",
@@ -76,7 +75,7 @@ export const AddBookingModel = ({
           bookTable(details, hotelId, () => {
             showToast(AddToastSuccessImg, `Table booked successfully `);
             onHide();
-            history(`/admin/hotelList/${hotelId}/view`, { replace: true });
+            history(`/customer/${hotelId}/view`, { replace: true });
           })
         );
       }
@@ -103,16 +102,16 @@ export const AddBookingModel = ({
             <Controller
               control={control}
               name="description"
-              render={(fields) => (
+              render={({field}) => (
                 <TextArea
-                  {...fields}
+                  {...field}
                   label="About party"
                   hasError={!!errors.description}
                   className="mb-3"
                   placeholder="Description"
                   rows="3"
                   onChange={(e) => {
-                    fields.onChange(e);
+                    field.onChange(e);
                   }}
                 />
               )}
@@ -124,9 +123,9 @@ export const AddBookingModel = ({
               <Controller
                 control={control}
                 name="phone"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.phone?.message
@@ -146,16 +145,16 @@ export const AddBookingModel = ({
               <Controller
                 control={control}
                 name="startDate"
-                render={(fields) => (
+                render={({field}) => (
                   <DateInput
-                    {...fields}
+                    {...field}
                     errorMessage={errors.startDate?.message}
                     hasError={!!errors.startDate}
                     label="Start Date"
                     placeholder="-Select-"
                     dateFormat="dd MMMM yyyy"
                     onChange={(e) => {
-                      fields.onChange(e);
+                      field.onChange(e);
                       setEventDate(e);
                     }}
                     className="start-date"
@@ -169,9 +168,9 @@ export const AddBookingModel = ({
               <Controller
                 control={control}
                 name="startTime"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.startTime?.message
@@ -192,9 +191,9 @@ export const AddBookingModel = ({
               <Controller
                 control={control}
                 name="endTime"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.endTime?.message

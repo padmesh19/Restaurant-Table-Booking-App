@@ -10,7 +10,6 @@ const knexOptions = {
     database: process.env.DB_DATABASE,
     host: process.env.DB_HOST,
     password: process.env.DB_PASSWORD,
-    timezone: 'utc',
     user: process.env.DB_USER,
   },
   debug: false,

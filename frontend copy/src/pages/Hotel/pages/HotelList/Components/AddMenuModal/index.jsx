@@ -31,7 +31,7 @@ export const AddMenuModal = ({
 }) => {
   const dispatch = useDispatch()
 
-  const { control, errors, handleSubmit, setValue } = useForm({
+  const { control, formState: { errors }, handleSubmit, setValue } = useForm({
     defaultValues: {
       foodName: "",
       menuType: null,
@@ -99,9 +99,9 @@ export const AddMenuModal = ({
               <Controller
                 control={control}
                 name="foodName"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.foodName?.message || formError?.foodName
@@ -120,9 +120,9 @@ export const AddMenuModal = ({
               <Controller
                 control={control}
                 name="menuType"
-                render={(fields) => (
+                render={({field}) => (
                   <Select
-                    {...fields}
+                    {...field}
                     hasError={!!errors.menuType}
                     errorMessage={errors.menuType?.message}
                     isLarge={false}

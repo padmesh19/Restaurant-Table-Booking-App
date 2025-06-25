@@ -35,14 +35,14 @@ export const ForgotPassword = () => {
     },
     resolver: yupResolver(forgotPasswordSchema),
   });
-  const history = useNavigate();
+  const navigate = useNavigate();
   const { error: serverError, isLoading } = useSelector(authSelector);
 
   const onSubmit = useCallback(
     (data) => {
       dispatch(
         resetPassword(data, () => {
-          history(`/reset-password-confirmation?email=${data.email}`);
+          navigate(`/reset-password-confirmation?email=${data.email}`);
         })
       );
     },
@@ -77,7 +77,7 @@ export const ForgotPassword = () => {
             <BackLink
               className="align-self-start back-link mb-4"
               onClick={() => {
-                history.goBack();
+                navigate(-1);
               }}
             />
             <Heading
@@ -92,9 +92,9 @@ export const ForgotPassword = () => {
               <Controller
                 control={control}
                 name="email"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoFocus
                     className="input-fields mb-4"
                     hasError={hasServerError || !!errors.email}

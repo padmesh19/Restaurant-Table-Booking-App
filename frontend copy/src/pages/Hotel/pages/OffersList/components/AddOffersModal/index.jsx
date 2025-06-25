@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup"
-import PropTypes from "prop-types"
 import { useCallback, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
@@ -29,7 +27,7 @@ export const AddOffersModel = ({ onHide, show }) => {
   const dispatch = useDispatch()
   const [imgData, setImg] = useState(null)
   const [imgUrl, setImgUrl] = useState(null)
-  const { control, errors, handleSubmit, watch } = useForm({
+  const { control, formState: { errors }, handleSubmit, watch } = useForm({
     defaultValues: {
       startDate: new Date(),
       endDate: new Date(),
@@ -87,16 +85,16 @@ export const AddOffersModel = ({ onHide, show }) => {
             <Controller
               control={control}
               name="description"
-              render={(fields) => (
+              render={({field}) => (
                 <TextArea
-                  {...fields}
+                  {...field}
                   label="Offer Description"
                   hasError={!!errors.description}
                   className="mb-3"
                   placeholder="Details"
                   rows="7"
                   onChange={(e) => {
-                    fields.onChange(e)
+                    field.onChange(e)
                   }}
                 />
               )}
@@ -117,9 +115,9 @@ export const AddOffersModel = ({ onHide, show }) => {
               <Controller
                 control={control}
                 name="startDate"
-                render={(fields) => (
+                render={({field}) => (
                   <DateInput
-                    {...fields}
+                    {...field}
                     errorMessage={errors.startDate?.message}
                     hasError={!!errors.startDate}
                     label="Start Date"
@@ -133,9 +131,9 @@ export const AddOffersModel = ({ onHide, show }) => {
               <Controller
                 control={control}
                 name="endDate"
-                render={(fields) => (
+                render={({field}) => (
                   <DateInput
-                    {...fields}
+                    {...field}
                     label="End Date"
                     errorMessage={errors.endDate?.message}
                     hasError={!!errors.endDate}
@@ -151,9 +149,4 @@ export const AddOffersModel = ({ onHide, show }) => {
       </form>
     </EditSessionContainer>
   )
-}
-
-AddOffersModel.propTypes = {
-  onHide: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 }

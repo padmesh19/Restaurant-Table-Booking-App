@@ -15,6 +15,7 @@ exports.getProfile = (req, res) => {
       us_email: req.user.email,
       us_profile_name: req.user.first_name,
       userProfile: req.user,
+      ...req.user,
     },
   });
 };

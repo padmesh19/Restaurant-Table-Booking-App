@@ -7,7 +7,7 @@ export const Nav = styled.nav`
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0px 15px 10px -9px rgba(0, 0, 0, 0.1);
   height: 80px;
-  background-color: #17252a;
+  /* background-color: #17252a; */
   padding: 0 3.33% !important;
   transition: top 0.24s;
 

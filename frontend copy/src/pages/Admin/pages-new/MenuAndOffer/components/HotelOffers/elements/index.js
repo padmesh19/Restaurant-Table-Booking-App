@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const AllOffersContainer = styled.div`
-  background-color: #17252a;
+  /* background-color: #17252a; */
   min-height: 100%;
   margin: 0 -0.9375rem;
   padding: 0 4rem 4.0625rem 4rem;

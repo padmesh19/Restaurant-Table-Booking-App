@@ -8,9 +8,9 @@ import CloseIcon from "../../../../../../assets/icons/close-modal.svg";
 // const DELAY = 500;
 
 export const Header = ({ hotel }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const onButtonCancel = () => {
-    history.goBack();
+    navigate(-1);
   };
 
   return (

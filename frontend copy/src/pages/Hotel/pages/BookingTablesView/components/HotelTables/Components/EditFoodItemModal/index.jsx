@@ -22,7 +22,7 @@ const FIELDS_IN_ORDER = ["tableName", "seatCount"]
 export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
   const dispatch = useDispatch()
 
-  const { control, errors, handleSubmit, setValue } = useForm({
+  const { control, formState: { errors }, handleSubmit, setValue } = useForm({
     defaultValues: {
       tableName: "",
       seatCount: "",
@@ -69,9 +69,9 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
               <Controller
                 control={control}
                 name="tableName"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.tableName?.message || formError?.tableName
@@ -90,9 +90,9 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
               <Controller
                 control={control}
                 name="seatCount"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     hasError={!!errors.seatCount}
                     label="seat count"

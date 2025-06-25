@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const CommentsListContainer = styled.div`
-  background-color: #3aafa9;
+  /* background-color: #3aafa9; */
   min-height: 100vh;
   margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 4.0625rem 4rem;

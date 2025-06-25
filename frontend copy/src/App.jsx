@@ -1,75 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router";
+import { Outlet } from "react-router";
+import { useDispatch } from "react-redux";
+import { fetchProfile } from "./redux/authSlice";
 
-import User from "./pages/Admin";
-import Hotel from "./pages/Hotel";
+const isAuthenticated = () => !!localStorage.getItem("jwtToken");
 
-import ForgotPasswordOld from "./pages/ForgotPasswordOld";
-import ResetPassword from "./pages/PasswordReset";
-import Signup from "./pages/SignupOld";
-import ActivateUser from "./pages/ActivateUser";
+function Root() {
+  const dispatch = useDispatch();
+  const [authChecked, setAuthChecked] = useState(false);
 
-import { LoginRoute, PrivateRoute } from "./PrivateRoute";
-import { ForgotPassword, Login, Register } from "./pages/Auth/pages";
+    useEffect(() => {
+    if (isAuthenticated()) {
+      dispatch(
+        fetchProfile((error) => {
+          if (error) {
+            localStorage.removeItem("jwtToken");
+          }
+          setAuthChecked(true);
+        })
+      );
+    } else {
+      setAuthChecked(true);
+    }
+  }, []);
 
-function App() {
-  const userType = localStorage.getItem("jc-user-type");
+
+  if (!authChecked) {
+    return <div>Loading...</div>; // global auth loading screen
+  }
 
   return (
     <>
       <Helmet>
         <title>Restaurant Table Booking</title>
       </Helmet>
-
-      <Routes>
-        <Route
-          path="/"
-          element={
-            userType === "1" ? (
-              <Navigate to="/hotel" replace />
-            ) : (
-              <Navigate to="/admin" replace />
-            )
-          }
-        />
-
-        {/* <Route path="/user/*" element={<User />} />
-
-        <Route
-          path="/hotel/*"
-          element={<PrivateRoute element={<Hotel />} isAdmin />}
-        />
-
-        <Route
-          path="/verify/:id"
-          element={<LoginRoute element={<ActivateUser />} />}
-        />
-        <Route
-          path="/password-reset/:id"
-          element={<LoginRoute element={<ResetPassword />} />}
-        />
-        <Route
-          path="/forgot-password"
-          element={<LoginRoute element={<ForgotPassword />} />}
-        />
-        <Route path="/login" element={<LoginRoute element={<Login />} />} />
-        <Route
-          path="/reset-password-confirmation"
-          element={<LoginRoute element={<ForgotPasswordOld />} />}
-        />
-        <Route
-          path="/register"
-          element={<LoginRoute element={<Register />} />}
-        />
-        <Route
-          path="/register-success"
-          element={<LoginRoute element={<Signup />} />}
-        /> */}
-      </Routes>
+      <Outlet />
     </>
   );
 }
 
-export default App;
+export default Root;

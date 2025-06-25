@@ -14,15 +14,10 @@ import { ProfileMenu } from "../../common/Navbar/components";
 import { authSelector, logout } from "../../../redux/authSlice";
 
 const Navbar = (properties) => {
-  const authState = useSelector(authSelector);
-  const [profileType, setProfileType] = useState(null);
+  const { user } = useSelector(authSelector);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const currentProfile = Number(localStorage.getItem("jc-user-type"));
-    setProfileType(currentProfile);
-  }, []);
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [isResponsiveProfileMenuOpen, setIsResponsiveProfileMenuOpen] =
@@ -34,20 +29,14 @@ const Navbar = (properties) => {
   const [isReservationsDropdownOpen, setIsReservationDropdownOpen] =
     useState(false);
 
-  const history = useLocation();
-  const { pathname } = history;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { pathname } = location;
 
   //   const isArchived = streamState?.classDetails?.class?.oc_is_archived
 
   const wrapperRef = useRef(null);
-  // const addWorksDropdownContainer = useRef(null);
 
-  /** checks and returns the token in the localstorage to hide and shoe the navbar */
-  const isAuthenticated = () => {
-    const token = localStorage.getItem("jwtToken");
-    return !!token;
-  };
-  console.log(isAuthenticated())
 
   /**
    * fetch Class Details on class Id change
@@ -57,132 +46,135 @@ const Navbar = (properties) => {
   /** Logout user */
   const logoutUser = () => {
     setIsProfileMenuOpen(false);
-    dispatch(logout());
-    history("/login");
+    dispatch(logout(() => {
+      navigate("/login", { replace: true });
+    }));
+
     // socket.emit(SOCKET_EVENTS.CS_OFFLINE, {
     //   roomId,
     //   userId,
     // })
   };
 
-  /** Redirect to selected class details screen */
 
-  const isTeacher = profileType === 2;
+  const isTeacher = user?.user_type === 1;
+  const profileType = user?.user_type
 
-  const userProfile = authState?.user?.userProfile;
-
-  console.log(authState?.user)
+  const userProfile = user?.userProfile;
   return (
     <>
-      {isAuthenticated() && (
-        <Nav className="navbar navbar-expand-sm p-0 fixed-top" {...properties}>
-          {/* eslint-disable-next-line no-nested-ternary */}
-          {profileType === 1 ? (
-            <ul className="col p-0 navbar-nav justify-content-center nav-pills h-100 d-flex">
-              <li className="nav-item admin-navitem active">
-                <NavLink
-                  className="nav-link d-flex align-items-center"
-                  activeClassName="activeLink"
-                  to="/hotel"
-                  exact
-                  id="dashboard-id"
-                >
-                  <span>Menu List</span>
-                </NavLink>
-              </li>
-              <li className="nav-item admin-navitem active">
-                <NavLink
-                  className="nav-link d-flex align-items-center"
-                  activeClassName="activeLink"
-                  to="/hotel/tables"
-                  exact
-                  id="dashboard-id"
-                >
-                  <span>Table List</span>
-                </NavLink>
-              </li>
-              <li className="nav-item admin-navitem active">
-                <NavLink
-                  className="nav-link d-flex align-items-center"
-                  activeClassName="activeLink"
-                  to="/hotel/offers"
-                  exact
-                  id="dashboard-id"
-                >
-                  <span>Offers List</span>
-                </NavLink>
-              </li>
 
-              <li className="nav-item admin-navitem active">
-                <button
-                  type="button"
-                  className={`activebtn nav-link d-flex align-items-center${
-                    pathname.includes("/reservations") ? " activeLink" : ""
+      <Nav className="navbar navbar-expand-sm p-0 fixed-top" {...properties}>
+        {profileType === 1 ? (
+          <ul className="col p-0 navbar-nav justify-content-center nav-pills h-100 d-flex">
+            <li className="nav-item admin-navitem active">
+              <NavLink
+               className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  end
+                to="/admin"
+                id="dashboard-id"
+              >
+                <span>Menu List</span>
+              </NavLink>
+            </li>
+            <li className="nav-item admin-navitem active">
+              <NavLink
+                className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  end
+                to="/admin/tables"
+                id="dashboard-id"
+              >
+                <span>Table List</span>
+              </NavLink>
+            </li>
+            <li className="nav-item admin-navitem active">
+              <NavLink
+                className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  end
+                to="/admin/offers"
+                id="dashboard-id"
+              >
+                <span>Offers List</span>
+              </NavLink>
+            </li>
+
+            <li className="nav-item admin-navitem active">
+              <button
+                type="button"
+                className={`activebtn nav-link d-flex align-items-center${pathname.includes("/reservations") ? " activeLink" : ""
                   }`}
-                  onMouseEnter={() => {
-                    setIsReservationDropdownOpen(true);
-                  }}
-                  onMouseLeave={() => {
-                    setIsReservationDropdownOpen(false);
-                  }}
-                  id="users-id"
-                >
-                  <span>Table Reservation</span>
-                  <img
-                    alt="Show Works"
-                    className="add-works-button-icon"
-                    src={
-                      pathname.includes("/reservations") ? arrowBlue : arrowGrey
-                    }
-                  />
-                  {isReservationsDropdownOpen ? (
-                    <div className="orgdropdown">
-                      <ul className="dropdown-content">
-                        <li href="#">
-                          <button
-                            className="organisation-dropdown-item"
-                            onClick={() => {
-                              setIsReservationDropdownOpen(false);
-                              history(`/hotel/reservations`);
-                            }}
-                            type="button"
-                            id="admin-teacher-id"
-                          >
-                            <span className="dropdown-text">
-                              All Reservations
-                            </span>
-                          </button>
-                        </li>
-                        <li href="#">
-                          <button
-                            className="organisation-dropdown-item"
-                            onClick={() => {
-                              setIsReservationDropdownOpen(false);
-                              history(`/hotel/reservations/calender`);
-                            }}
-                            type="button"
-                            id="student-id"
-                          >
-                            <span className="dropdown-text">Calendar</span>
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  ) : null}
-                </button>
-              </li>
-              <li className="nav-item admin-navitem active">
-                <NavLink
-                  className="nav-link d-flex align-items-center"
-                  activeClassName="activeLink"
-                  to="/hotel/comments"
-                  exact
-                  id="dashboard-id"
-                >
-                  <span>User Comments</span>
-                </NavLink>
-              </li>
-              {/*
+                onMouseEnter={() => {
+                  setIsReservationDropdownOpen(true);
+                }}
+                onMouseLeave={() => {
+                  setIsReservationDropdownOpen(false);
+                }}
+                id="users-id"
+              >
+                <span>Table Reservation</span>
+                <img
+                  alt="Show Works"
+                  className="add-works-button-icon"
+                  src={
+                    pathname.includes("/reservations") ? arrowBlue : arrowGrey
+                  }
+                />
+                {isReservationsDropdownOpen ? (
+                  <div className="orgdropdown">
+                    <ul className="dropdown-content">
+                      <li href="#">
+                        <button
+                          className="organisation-dropdown-item"
+                          onClick={() => {
+                            setIsReservationDropdownOpen(false);
+                            navigate(`/admin/reservations`);
+                          }}
+                          type="button"
+                          id="admin-teacher-id"
+                        >
+                          <span className="dropdown-text">
+                            All Reservations
+                          </span>
+                        </button>
+                      </li>
+                      <li href="#">
+                        <button
+                          className="organisation-dropdown-item"
+                          onClick={() => {
+                            setIsReservationDropdownOpen(false);
+                            navigate(`/admin/reservations/calender`);
+                          }}
+                          type="button"
+                          id="student-id"
+                        >
+                          <span className="dropdown-text">Calendar</span>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                ) : null}
+              </button>
+            </li>
+            <li className="nav-item admin-navitem active">
+              <NavLink
+                className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  end
+                to="/admin/comments"
+                id="dashboard-id"
+              >
+                <span>User Comments</span>
+              </NavLink>
+              
+            </li>
+            {/*
                 <li className="nav-item admin-navitem active">
                   <button
                     type="button"
@@ -326,7 +318,7 @@ const Navbar = (properties) => {
                               </span>
                             </button>
                           </li> */}
-              {/* <li href="#">
+            {/* <li href="#">
                             <button
                               className="organisation-dropdown-item"
                               onClick={() => {
@@ -338,7 +330,7 @@ const Navbar = (properties) => {
                               <span className="dropdown-text">Teacher</span>
                             </button>
                           </li> */}
-              {/* <li href="#">
+            {/* <li href="#">
                             <button
                               className="organisation-dropdown-item"
                               onClick={() => {
@@ -369,7 +361,7 @@ const Navbar = (properties) => {
                   </NavLink>
                 </li> */}
 
-              {/* <li className="nav-item admin-navitem active">
+            {/* <li className="nav-item admin-navitem active">
                   <NavLink
                     className="nav-link d-flex align-items-center"
                     activeClassName="activeLink"
@@ -378,34 +370,36 @@ const Navbar = (properties) => {
                     <span>Units</span>
                   </NavLink>
                 </li> */}
-            </ul>
-          ) : (
-            <ul className="col p-0 navbar-nav justify-content-center nav-pills h-100 d-flex">
-              {isTeacher ? (
-                <>
-                  <li className="nav-item active">
-                    <NavLink
-                      className="nav-link d-flex align-items-center"
-                      activeClassName="activeLink"
-                      to="/admin"
-                      exact
-                      id="stream-id"
-                    >
-                      <span>Hotel List</span>
-                    </NavLink>
-                  </li>
-                  <li className="nav-item admin-navitem active">
-                    <NavLink
-                      className="nav-link d-flex align-items-center"
-                      activeClassName="activeLink"
-                      to="/admin/history"
-                      exact
-                      id="dashboard-id"
-                    >
-                      <span>Booking History</span>
-                    </NavLink>
-                  </li>
-                  {/*
+          </ul>
+        ) : (
+          <ul className="col p-0 navbar-nav justify-content-center nav-pills h-100 d-flex">
+
+            <>
+              <li className="nav-item admin-navitem active">
+                <NavLink
+                  to="/customer"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  end
+                  id="stream-id"
+                >
+                  <span>Hotel List</span>
+                </NavLink>
+              </li>
+              <li className="nav-item admin-navitem active">
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? "nav-link d-flex align-items-center activeLink" : "nav-link d-flex align-items-center"
+                  }
+                  to="/customer/history"
+                  exact
+                  id="dashboard-id"
+                >
+                  <span>Booking History</span>
+                </NavLink>
+              </li>
+              {/*
                   <li className="nav-item active">
                     <NavLink
                       className="nav-link d-flex align-items-center"
@@ -416,7 +410,7 @@ const Navbar = (properties) => {
                       <span>Works</span>
                     </NavLink>
                   </li> */}
-                  {/* <li className="nav-item active">
+              {/* <li className="nav-item active">
             <NavLink
               className="nav-link d-flex align-items-center"
               activeClassName="activeLink"
@@ -425,7 +419,7 @@ const Navbar = (properties) => {
               <span>Units</span>
             </NavLink>
           </li> */}
-                  {/* <li className="nav-item active">
+              {/* <li className="nav-item active">
                     <NavLink
                       className="nav-link d-flex align-items-center"
                       activeClassName="activeLink"
@@ -455,16 +449,15 @@ const Navbar = (properties) => {
                       <span className="flex-shrink-0">Library</span>
                     </NavLink>
                   </li> */}
-                </>
-              ) : null}
-            </ul>
-          )}
-          <div className="rightSideNavbar-resp">
-            <div className="d-flex p-0 col rightSideNavbar">
-              {/* </div> */}
-              {/* ) : null} */}
-              <div ref={wrapperRef} className="wrapperForlogout">
-                {isTeacher ? (
+            </>
+          </ul>
+        )}
+        <div className="rightSideNavbar-resp">
+          <div className="d-flex p-0 col rightSideNavbar">
+            {/* </div> */}
+            {/* ) : null} */}
+            <div ref={wrapperRef} className="wrapperForlogout">
+              {/* {isTeacher ? (
                   <button
                     className="bg-white border-0 home-icon"
                     onClick={() => history("/classes")}
@@ -473,44 +466,43 @@ const Navbar = (properties) => {
                   >
                     <img src={homeIco} alt="homeIco" />
                   </button>
-                ) : null}
+                ) : null} */}
 
-                <button
-                  className="profile-btn border-0 d-flex"
-                  onClick={() => {
-                    setIsProfileMenuOpen(!isProfileMenuOpen);
-                    setIsResponsiveProfileMenuOpen(
-                      !isResponsiveProfileMenuOpen
-                    );
-                  }}
-                  type="submit"
-                  id="profile-id"
-                >
-                  <img
-                    src={
-                      userProfile?.up_avatar_thumbnail
-                        ? userProfile?.up_avatar_thumbnail
-                        : profile
-                    }
-                    className="cursor-pointer"
-                    alt="profile"
-                  />
-                </button>
-
-                <ProfileMenu
-                  email={userProfile?.email}
-                  isVisible={isProfileMenuOpen}
-                  name={`${userProfile?.first_name} ${userProfile?.last_name}`}
-                  onClose={() => {
-                    setIsProfileMenuOpen(false);
-                  }}
-                  onLogout={logoutUser}
+              <button
+                className="profile-btn border-0 d-flex"
+                onClick={() => {
+                  setIsProfileMenuOpen(!isProfileMenuOpen);
+                  setIsResponsiveProfileMenuOpen(
+                    !isResponsiveProfileMenuOpen
+                  );
+                }}
+                type="submit"
+                id="profile-id"
+              >
+                <img
+                  src={
+                    userProfile?.up_avatar_thumbnail
+                      ? userProfile?.up_avatar_thumbnail
+                      : profile
+                  }
+                  className="cursor-pointer"
+                  alt="profile"
                 />
-              </div>
+              </button>
+
+              <ProfileMenu
+                email={userProfile?.email}
+                isVisible={isProfileMenuOpen}
+                name={`${userProfile?.first_name} ${userProfile?.last_name}`}
+                onClose={() => {
+                  setIsProfileMenuOpen(false);
+                }}
+                onLogout={logoutUser}
+              />
             </div>
           </div>
-        </Nav>
-      )}
+        </div>
+      </Nav>
     </>
   );
 };

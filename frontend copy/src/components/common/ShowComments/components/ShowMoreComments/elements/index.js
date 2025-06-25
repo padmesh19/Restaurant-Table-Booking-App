@@ -86,7 +86,7 @@ export const CommentModalContainer = styled.div`
     width: 3rem;
     text-transform: uppercase;
     color: #3aafa9;
-    background: #17252a;
+    /* background: #17252a; */
   }
   .comments {
     overflow-wrap: anywhere;

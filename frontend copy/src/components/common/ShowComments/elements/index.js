@@ -17,9 +17,9 @@ export const ShowCommentsCardContainer = styled(motion.div)`
   flex-direction: column;
   justify-content: space-between;
   &.is-user {
-    background-color: #3aafa9;
+    /* background-color: #3aafa9; */
   }
-  background-color: #17252a;
+  /* background-color: #17252a; */
   cursor: pointer;
   transition: transform 200ms ease-in;
 
@@ -158,7 +158,7 @@ export const ShowCommentsCardContainer = styled(motion.div)`
     width: 2.5rem;
     text-transform: uppercase;
     color: #3aafa9;
-    background: #17252a;
+    /* background: #17252a; */
   }
   .card-right {
     display: flex;

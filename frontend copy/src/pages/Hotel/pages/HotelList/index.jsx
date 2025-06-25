@@ -179,18 +179,18 @@ export const HotelMenuList = () => {
           title="No Items Found!"
         />
       ) : null}
-      {/* <AddMenuModal
+      <AddMenuModal
         show={show}
         onHide={clearEditDetails}
         onSubmit={onSubmit}
         addUnits={addUnits}
         setAddUnits={setAddUnits}
-      /> */}
-      {/* <EditFoodItemModal
+      /> 
+      <EditFoodItemModal
         editDetails={editDetails}
         onHide={clearEditFoodDetails}
         onSubmit={onEditSubmit}
-      /> */}
+      />
       <Modal
         buttonLabel="Delete"
         description="Are you sure you want to delete this food from hotel list?"

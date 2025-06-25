@@ -47,26 +47,6 @@ export const {
   setOnlineStudents,
 } = authSlice.actions
 
-export const fetchOrganisationByRtoCode =
-  (rtoCode, callback) => async (dispatch) => {
-    try {
-      if (rtoCode) {
-        const response = await authApi.fetchOrganisationByRtoCode(rtoCode)
-        dispatch(setOrganisation(response.data?.organisation || null))
-
-        if (callback) {
-          callback()
-        }
-      }
-    } catch (error) {
-      dispatch(setOrganisation(null))
-      dispatch(
-        setError(error?.response?.data?.message || "Something went wrong.")
-      )
-    } finally {
-      dispatch(setIsLoading(false))
-    }
-  }
 
 export const logIn = (data, callback) => async (dispatch) => {
   dispatch(setIsLoading(true))
@@ -100,31 +80,31 @@ export const logIn = (data, callback) => async (dispatch) => {
   }
 }
 
-export const logInAfterVerification =
-  (user, token, callback) => async (dispatch) => {
-    dispatch(setIsLoading(true))
+// export const logInAfterVerification =
+//   (user, token, callback) => async (dispatch) => {
+//     dispatch(setIsLoading(true))
 
-    try {
-      const [userProfile] = user.userProfiles
-      dispatch(setUser(user))
+//     try {
+//       const [userProfile] = user.userProfiles
+//       dispatch(setUser(user))
 
-      if (userProfile?.up_id_user && userProfile?.up_id_typeuserprofile) {
-        localStorage.setItem("jc-user-type", userProfile.up_id_typeuserprofile)
-        localStorage.setItem("jwtToken", token)
-        localStorage.setItem("userId", userProfile.up_id_user)
+//       if (userProfile?.up_id_user && userProfile?.up_id_typeuserprofile) {
+//         localStorage.setItem("jc-user-type", userProfile.up_id_typeuserprofile)
+//         localStorage.setItem("jwtToken", token)
+//         localStorage.setItem("userId", userProfile.up_id_user)
 
-        if (callback) {
-          callback(userProfile)
-        }
-      }
-    } catch (error) {
-      dispatch(
-        setError(error?.response?.data?.message || "Something went wrong.")
-      )
-    } finally {
-      dispatch(setIsLoading(false))
-    }
-  }
+//         if (callback) {
+//           callback(userProfile)
+//         }
+//       }
+//     } catch (error) {
+//       dispatch(
+//         setError(error?.response?.data?.message || "Something went wrong.")
+//       )
+//     } finally {
+//       dispatch(setIsLoading(false))
+//     }
+//   }
 
 export const register = (data, callback) => async (dispatch) => {
   dispatch(setIsLoading(true))
@@ -210,8 +190,12 @@ export const fetchProfile = (callback) => async (dispatch) => {
         localStorage.setItem("userId", userProfile.user_id)
       }
     }
+    callback();
   } catch (error) {
     dispatch(logout(callback))
+     if (typeof callback === "function") {
+      callback(error); // For PrivateRoute to redirect
+    }
 
     dispatch(
       setError(error?.response?.data?.message || "Something went wrong.")

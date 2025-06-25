@@ -12,12 +12,14 @@ export const HotelMenuList = ({ hotelMenuList, isListLoading }) => {
     () => [
       {
         Header: "#",
-        accessor: "serial",
+        accessorKey: "serial",
+        id: "serial",
         className: "serial",
       },
       {
         Header: "Menu Name",
-        accessor: "menu_name",
+        accessorKey: "menu_name",
+        id: "menu_name",
         className: "table-name",
       },
       {
@@ -27,7 +29,8 @@ export const HotelMenuList = ({ hotelMenuList, isListLoading }) => {
             <span className="badge badge-pill badge-warning p-2">{value}</span>
           </div>
         ),
-        accessor: "menu_type_name",
+        accessorKey: "menu_type_name",
+        id: "menu_type_name",
 
         className: "seat-count",
       },

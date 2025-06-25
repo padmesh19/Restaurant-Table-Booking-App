@@ -31,7 +31,7 @@ export const AddHotelTableModal = ({
 }) => {
   const dispatch = useDispatch()
 
-  const { control, errors, handleSubmit, setValue } = useForm({
+  const { control, formState: { errors }, handleSubmit, setValue } = useForm({
     defaultValues: {
       tableName: "",
       seatCount: "",
@@ -88,9 +88,9 @@ export const AddHotelTableModal = ({
               <Controller
                 control={control}
                 name="tableName"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.tableName?.message || formError?.tableName
@@ -109,9 +109,9 @@ export const AddHotelTableModal = ({
               <Controller
                 control={control}
                 name="seatCount"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     hasError={!!errors.seatCount}
                     label="seat count"

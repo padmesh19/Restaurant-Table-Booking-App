@@ -122,6 +122,7 @@ const login = async (req, res) => {
       user_id: user.user_id,
       us_email: user.email,
       userProfile: user,
+      ...user,
       organisation,
     };
 

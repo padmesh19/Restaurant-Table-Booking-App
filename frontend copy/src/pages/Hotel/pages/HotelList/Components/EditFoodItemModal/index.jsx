@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
 import { yupResolver } from "@hookform/resolvers/yup"
-import PropTypes from "prop-types"
 import { useMemo, useCallback, useEffect } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useDispatch, useSelector } from "react-redux"
@@ -22,7 +20,7 @@ const FIELDS_IN_ORDER = ["foodName", "menuType"]
 export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
   const dispatch = useDispatch()
 
-  const { control, errors, handleSubmit, setValue } = useForm({
+  const { control, formState: { errors }, handleSubmit, setValue } = useForm({
     defaultValues: {
       foodName: "",
       menuType: null,
@@ -55,12 +53,14 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
 
   useEffect(() => {
     if (editDetails) {
+      console.log(editDetails);
       setValue("menuType", {
         label: editDetails.menuType?.name,
         value: editDetails.menuType?.id,
       })
 
       setValue("foodName", editDetails.foodName)
+
     }
   }, [editDetails, setValue])
 
@@ -84,9 +84,9 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
               <Controller
                 control={control}
                 name="foodName"
-                render={(fields) => (
+                render={({field}) => (
                   <TextInput
-                    {...fields}
+                    {...field}
                     autoComplete="off"
                     errorMessage={
                       errors.foodName?.message || formError?.foodName
@@ -105,9 +105,9 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
               <Controller
                 control={control}
                 name="menuType"
-                render={(fields) => (
+                render={({field}) => (
                   <Select
-                    {...fields}
+                    {...field}
                     hasError={!!errors.menuType}
                     errorMessage={errors.menuType?.message}
                     isLarge={false}
@@ -124,21 +124,4 @@ export const EditFoodItemModal = ({ onHide, onSubmit, editDetails }) => {
       </form>
     </EditFoodModalContainer>
   )
-}
-
-EditFoodItemModal.defaultProps = {
-  editDetails: null,
-}
-
-EditFoodItemModal.propTypes = {
-  editDetails: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    foodName: PropTypes.string.isRequired,
-    menuType: PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-  }),
-  onHide: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
 }

@@ -110,9 +110,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="name"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   autoFocus
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.name}
@@ -124,9 +124,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="email"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.email}
                   autoComplete="off"
@@ -138,9 +138,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="password"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   autoComplete="off"
                   hasError={hasServerError || !!errors.password}
@@ -153,9 +153,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="confirmPassword"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.confirmPassword}
                   label="Confirm Password"
@@ -167,9 +167,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="stateName"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={!!errors.state}
                   label="State"
@@ -180,9 +180,9 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="districtName"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={!!errors.district}
                   label="District"

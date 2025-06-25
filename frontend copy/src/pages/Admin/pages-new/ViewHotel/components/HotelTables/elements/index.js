@@ -3,7 +3,6 @@ import styled from "styled-components"
 import { AdminListingPageContainer } from "../../../../../elements-new"
 
 export const HotelTableContainer = styled(AdminListingPageContainer)`
-  background-color: #17252a;
   .title {
     color: white;
   }

@@ -172,9 +172,9 @@ export const EditUnitsToCourse = ({ addUnits, setAddUnits }) => {
                 <Controller
                   control={control}
                   name="unit"
-                  render={(fields) => (
+                  render={({field}) => (
                     <Select
-                      {...fields}
+                      {...field}
                       hasError={!!errors.unit}
                       errorMessage={errors.unit?.message}
                       isLarge={false}
@@ -194,9 +194,9 @@ export const EditUnitsToCourse = ({ addUnits, setAddUnits }) => {
                 <Controller
                   control={control}
                   name="sessions"
-                  render={(fields) => (
+                  render={({field}) => (
                     <TextInput
-                      {...fields}
+                      {...field}
                       autoComplete="off"
                       hasError={!!errors.sessions}
                       label="Sessions"
@@ -211,9 +211,9 @@ export const EditUnitsToCourse = ({ addUnits, setAddUnits }) => {
                 <Controller
                   control={control}
                   name="hours"
-                  render={(fields) => (
+                  render={({field}) => (
                     <TextInput
-                      {...fields}
+                      {...field}
                       autoComplete="off"
                       hasError={!!errors.hours}
                       label="Hours"

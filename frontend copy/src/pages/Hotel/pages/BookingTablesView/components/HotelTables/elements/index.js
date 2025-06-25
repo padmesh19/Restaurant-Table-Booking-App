@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { AdminListingPageContainer } from "../../../../../../Admin/elements-new"
 
 export const BookingContainer = styled(AdminListingPageContainer)`
-  background-color: #3aafa9;
+  /* background-color: #3aafa9; */
   @media (max-width: 75rem) {
     .icon {
       transform: rotate(90deg);

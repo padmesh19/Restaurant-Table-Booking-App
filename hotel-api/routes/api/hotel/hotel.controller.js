@@ -124,6 +124,7 @@ exports.deleteMenu = async (req, res) => {
 
 exports.getAllHotelTable = async (req, res) => {
   try {
+    console.log(req.user);
     const { hotel_id: hotelId } = req.user.hotel;
     const allHotelTables = await HotelTables.fetchAllHotelTables({
       table_hotel_id: hotelId,

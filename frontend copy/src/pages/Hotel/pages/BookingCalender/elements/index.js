@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const CalenderContainer = styled.div`
-  background-color: #3aafa9;
+  /* background-color: #3aafa9; */
   min-height: 100vh;
   padding: 7.0625rem 4rem 7rem 4rem;
 

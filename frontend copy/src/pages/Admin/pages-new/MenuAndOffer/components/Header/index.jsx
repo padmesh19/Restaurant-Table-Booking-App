@@ -10,7 +10,7 @@ import CloseIcon from "../../../../../../assets/icons/close-modal.svg";
 export const Header = ({ hotel, hotelId }) => {
   const history = useNavigate();
   const onButtonCancel = () => {
-    history(`/admin/hotelList/${hotelId}/view`, { replace: true });
+    history(`/customer/${hotelId}/view`, { replace: true });
   };
 
   return (

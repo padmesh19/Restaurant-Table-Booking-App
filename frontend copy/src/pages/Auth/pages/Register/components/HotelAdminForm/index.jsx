@@ -129,9 +129,9 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="name"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   autoFocus
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.name}
@@ -143,9 +143,9 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="email"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="mb-3"
                   hasError={hasServerError || !!errors.email}
                   label="Email"
@@ -156,9 +156,9 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="password"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.password}
                   label="Password"
@@ -170,9 +170,9 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="confirmPassword"
-              render={(fields) => (
+              render={({field}) => (
                 <TextInput
-                  {...fields}
+                  {...field}
                   className="input-fields mb-3"
                   hasError={hasServerError || !!errors.confirmPassword}
                   label="Confirm Password"

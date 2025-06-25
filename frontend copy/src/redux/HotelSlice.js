@@ -9,7 +9,7 @@ const hotelSlice = createSlice({
     error: null,
     hotelMenuList: null,
     hotelTableList: null,
-    hotelOffersList: null,
+    hotelOffersList: [],
     viewHotel: null,
     bookingList: null,
     isListLoading: true,

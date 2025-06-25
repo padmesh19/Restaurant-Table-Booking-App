@@ -49,7 +49,7 @@
 // export default Hotel;
 
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "react-router";
 import Navbar from "../../components/shared/Navbar";
 
 const Hotel = () => {
