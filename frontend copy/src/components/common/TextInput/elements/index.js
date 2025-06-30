@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 
 export const InputElementContainer = styled.div`
   border: 0.0625rem solid ${({ theme }) => theme.colors.border};
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   overflow: hidden;
   transition: border-color 0.1s, box-shadow 0.1s;
 
@@ -21,7 +21,7 @@ export const InputElementContainer = styled.div`
 
   .text-input {
     border: none;
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.textDark};
     font-size: 0.875rem;
     line-height: 1.125rem;
     padding: 0.75rem 1rem;
@@ -43,9 +43,9 @@ export const InputElementContainer = styled.div`
   .toggle-visibility-button {
     background-color: transparent;
     border: none;
-    height: 1.25rem;
-    right: 1.5rem;
-    width: 1.25rem;
+    right: 1.25rem;
+    width: 1rem;
+    padding:0;
 
     :active,
     :focus {
@@ -54,7 +54,6 @@ export const InputElementContainer = styled.div`
 
     .visibility-icon {
       height: 100%;
-      width: 100%;
     }
   }
 
@@ -67,7 +66,7 @@ export const InputElementContainer = styled.div`
       animation: spin 1s linear infinite;
     }
   }
-`
+`;
 
 export const TextInputContainer = styled.div`
   ${({ maxWidth }) =>

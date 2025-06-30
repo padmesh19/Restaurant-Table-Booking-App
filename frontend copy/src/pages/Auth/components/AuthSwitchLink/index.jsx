@@ -4,7 +4,7 @@ import { Link } from "../../../../components/common"
 import { AuthSwitchLinkContainer } from "./elements"
 
 export const AuthSwitchLink = ({ linkHref, linkText, onLinkClick, text }) => (
-  <AuthSwitchLinkContainer className="align-items-center d-flex w-100">
+  <AuthSwitchLinkContainer className="align-items-center d-flex gap-1 w-100">
     <span className="mr-1 text">{text}</span>
     <Link className="link-text" onClick={onLinkClick} to={linkHref}>
       {linkText}

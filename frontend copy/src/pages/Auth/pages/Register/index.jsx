@@ -47,18 +47,17 @@ export const Register = () => {
   }, [removeAccountType]);
 
   return (
-    <div className="no-gutters row auth-container">
+    <div className="auth-container">
       <Helmet>
         <title>Register | Restaurant Table Booking</title>
       </Helmet>
       <div className="auth-bg" />
-      <div className="auth-bg bg2" />
-      <div className="auth-bg bg3" />
-      {!accountType ? (
+      {!accountType && (
         <ChooseAccountType onClickAccountType={onClickAccountType} />
-      ) : null}
-      {accountType !== "User" ? (
-        !organisationName ? (
+      ) }
+      {accountType &&
+        accountType === "Hotel" &&
+        (!organisationName ? (
           <OrganisationForm
             onClickNext={onClickNext}
             onNavigateBack={onNavigateBack}
@@ -70,8 +69,8 @@ export const Register = () => {
             onNavigateBackToChooseType={onNavigateBackToChooseType}
             accountType={accountType}
           />
-        )
-      ) : (
+        ))}
+      {accountType && accountType === "User" && (
         <UserForm
           onNavigateBack={onNavigateBackToChooseType}
           accountType={accountType}

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import bg from "../../../../assets/images/login/background.png"
 
 const StyledSuccessMessage = styled.div`
-  margin: 0 -15px;
+  margin: 0;
   background-image: url(${bg});
   min-height: 100vh !important;
   background-position: center;

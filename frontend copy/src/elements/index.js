@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components"
 export const theme = {
   colors: {
     background: "#f4f5f8",
-    border: "#e0e0e0",
+    border: "#FFFCFB",
     danger: "#eb5757",
     dangerButtonActive: "#cc5454",
     dangerButtonHover: "#ff8787",
@@ -13,13 +13,14 @@ export const theme = {
     lighterPrimary: "#ecf6ff",
     lightDanger: "#ebc6be",
     lightPrimary: "#cfe7ff",
-    lightText: "#8a8c94",
+    lightText: "#98A1BC",
     placeholder: "#c0c0c0",
-    primary: "#40a1ff",
+    primary: "#3674B5",
     primaryAlt: "#5ba1f2",
-    text: "#3d4457",
+    text: "#F4EBD3",
+    textDark: "#2A1458",
   },
-}
+};
 
 export const GlobalStyles = createGlobalStyle`
   html,

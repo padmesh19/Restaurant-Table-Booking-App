@@ -8,7 +8,7 @@ export const HeadingContainer = styled.div`
     -webkit-line-clamp: 2;
     color: ${({ theme }) => theme.colors.text};
     display: -webkit-box !important;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 600;
     letter-spacing: 0.025rem;
     line-height: 2.375rem;

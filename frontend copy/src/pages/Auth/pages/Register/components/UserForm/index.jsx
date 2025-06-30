@@ -10,6 +10,7 @@ import { useNavigate } from "react-router";
 import {
   BackLink,
   Button,
+  Select,
   Spacer,
   TextInput,
 } from "../../../../../../components/common";
@@ -18,6 +19,7 @@ import {
   register as registerTeacher,
   setError,
 } from "../../../../../../redux/authSlice";
+import { State, City } from "country-state-city";
 
 import { useErrorMessage } from "../../../../../../utils/hooks";
 import { registerTeacherSchema } from "../../../../../../utils/validation";
@@ -86,35 +88,34 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
   );
 
   return (
-    <UserFormContainer className="align-items-center col-lg-12 col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+    <UserFormContainer className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
       <ErrorAlert isVisible={!!errorMessage} message={errorMessage} />
-      <Spacer height="20rem" />
+      {/* <Spacer height="20rem" /> */}
       <main className="d-flex flex-column main-content w-100">
-        <div className="d-flex flex-column justify-content-center flex-grow-1">
+        <div className="d-flex flex-column justify-content-center flex-grow-1 gap-3">
           <BackLink
-            className="mb-3"
+            className="align-self-start p-0 gap-1"
             onClick={() => {
               onNavigateBack();
             }}
           />
           <Heading
-            marginBottom="2rem"
             subtitle="Enter your details to create an account."
-            title="Restaurant"
+            title="Create User"
           />
           <form
             autoComplete="off"
-            className="align-items-center d-flex flex-column w-100"
+            className="align-items-center d-flex flex-column w-100 gap-3"
             onSubmit={handleSubmit(onSubmit)}
           >
             <Controller
               control={control}
               name="name"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
                   autoFocus
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.name}
                   label="Full Name"
                   placeholder="Enter your full name"
@@ -124,10 +125,10 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="email"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.email}
                   autoComplete="off"
                   label="Email"
@@ -138,10 +139,10 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="password"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   autoComplete="off"
                   hasError={hasServerError || !!errors.password}
                   label="Password"
@@ -153,10 +154,10 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="confirmPassword"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.confirmPassword}
                   label="Confirm Password"
                   placeholder="Confirm the password"
@@ -167,10 +168,10 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="stateName"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={!!errors.state}
                   label="State"
                   placeholder="Enter your state name"
@@ -180,10 +181,10 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
             <Controller
               control={control}
               name="districtName"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={!!errors.district}
                   label="District"
                   placeholder="Enter your district name"
@@ -212,7 +213,7 @@ export const UserForm = ({ onNavigateBack, accountType }) => {
           />
         </div>
       </main>
-      <Spacer height="4rem" />
+      {/* <Spacer height="2rem" /> */}
     </UserFormContainer>
   );
 };

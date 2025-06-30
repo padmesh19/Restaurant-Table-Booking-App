@@ -123,34 +123,34 @@ export const OrganisationForm = ({
   // }, [organisation, setValue]);
 
   return (
-    <section className="align-items-center col-lg-12 col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+    <section className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
       <ErrorAlert isVisible={!!errorMessage} message={errorMessage} />
       <main className="d-flex flex-column main-content w-100">
         {/* <Spacer height="4rem" /> */}
-        <div className="d-flex flex-column justify-content-center flex-grow-1">
+        <div className="d-flex flex-column justify-content-center flex-grow-1 gap-3">
           <BackLink
-            className="mb-3"
+            className="align-self-start p-0 gap-1"
             onClick={() => {
-              onNavigateBackToChooseType()
-              goBack()
+              onNavigateBackToChooseType();
+              goBack();
             }}
           />
           <Heading
-            marginBottom="1rem"
             subtitle="Enter your details to create an account."
-            title="Create Your Account"
+            title="Create Restaurant"
           />
           <form
-            className="align-items-center d-flex flex-column w-100"
+            autoComplete="off"
+            className="align-items-center d-flex flex-column w-100 gap-3"
             onSubmit={handleSubmit(onSubmit)}
           >
             <Controller
               control={control}
               name="state"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={!!errors.state}
                   label="State"
                   placeholder="Enter your state name"
@@ -160,10 +160,10 @@ export const OrganisationForm = ({
             <Controller
               control={control}
               name="district"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={!!errors.district}
                   label="District"
                   placeholder="Enter your district name"
@@ -173,25 +173,25 @@ export const OrganisationForm = ({
             <Controller
               control={control}
               name="restaurantName"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={!!errors.restaurantName}
                   label="Hotel / Restaurant Name"
                   placeholder="Enter hotel / restaurant name"
                 />
               )}
             />
-            <Button isLarge label="Next" type="submit" className="mt-3" />
+            <Button isLarge label="Next" type="submit" className="mt-2" />
           </form>
           <AuthSwitchLink
             linkHref="/login"
             linkText="Login"
             onLinkClick={() => {
-              dispatch(setOrganisation(null))
-              onNavigateBackToChooseType()
-              clearServerError()
+              dispatch(setOrganisation(null));
+              onNavigateBackToChooseType();
+              clearServerError();
             }}
             text="Already have an account?"
           />
@@ -199,7 +199,7 @@ export const OrganisationForm = ({
         {/* <Spacer height="4rem" /> */}
       </main>
     </section>
-  )
+  );
 }
 
 OrganisationForm.propTypes = {

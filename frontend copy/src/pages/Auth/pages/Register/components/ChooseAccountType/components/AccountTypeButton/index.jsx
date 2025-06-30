@@ -4,8 +4,8 @@ import classNames from "classnames"
 
 const AccountTypeButtonContainer = styled.button`
   border: 0.0625rem solid #e0e0e0;
-  width: 19.85rem;
-  padding: 1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   outline: none;
   background: linear-gradient(to bottom, #7cb8fd 50%, #fff 50%);
@@ -19,7 +19,7 @@ const AccountTypeButtonContainer = styled.button`
   img {
     vertical-align: middle;
   }
-  :hover {
+  &:hover {
     background-position: top;
     border: 0.0625rem solid #ecf6ff;
     .button-inside {
@@ -34,12 +34,12 @@ const AccountTypeButtonContainer = styled.button`
     align-items: center;
     justify-content: center;
     .icon-container {
-      height: 2rem;
       width: 2rem;
+      height:2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 0.5rem;
+      border-radius: 50%;
     }
     .iconbackground {
       background-color: #ecf6ff;

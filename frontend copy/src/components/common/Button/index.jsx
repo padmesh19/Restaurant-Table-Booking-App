@@ -26,7 +26,7 @@ export const Button = ({
       "justify-content-center",
       className,
       {
-        "py-3": isLarge,
+        "py-2": isLarge,
         "w-100": isFullWidth,
         "is-cancel": isCancel,
       }

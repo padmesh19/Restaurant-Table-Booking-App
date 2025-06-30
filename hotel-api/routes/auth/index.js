@@ -23,9 +23,6 @@ router.post(
   [check('password').not().isEmpty(), check('c_password').not().isEmpty()],
   controller.resetPassword
 );
-router.get('/findUserByToken', controller.findUserByToken);
-
-
 
 // register the org-admin.
 router.post(
@@ -38,7 +35,6 @@ router.post(
   ],
   controller.registerOrgAdmin
 );
-router.post('/register/findOrgName', controller.findOrgName);
 
 // verify the org-admin.
 router.get('/verify-user/:userId', controller.verifyUser);

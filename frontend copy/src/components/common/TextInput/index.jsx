@@ -104,7 +104,7 @@ export const TextInput = forwardRef(
             autoFocus={autoFocus}
             className={classNames("text-input", "w-100", {
               "is-large": isLarge,
-              "pr-5": type === "password",
+              "pr-4": type === "password",
             })}
             id={id}
             onFocus={(e) => {

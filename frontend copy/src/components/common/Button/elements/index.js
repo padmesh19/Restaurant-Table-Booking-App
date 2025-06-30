@@ -3,8 +3,8 @@ import styled from "styled-components"
 export const ButtonContainer = styled.button`
   background-color: ${({ theme }) => theme.colors.primary};
   border: 0.0625rem solid ${({ theme }) => theme.colors.primary};
-  border-radius: 0.5rem;
-  padding: 0.6875rem 1.25rem;
+  border-radius: 0.25rem;
+  padding: 0.625rem 3rem;
   transition: background-color 0.1s, border-color 0.1s, box-shadow 0.1s;
   opacity: ${(props) => (props.isDisabled ? 0.6 : 1)} !important;
   cursor: ${(props) =>
@@ -24,12 +24,13 @@ export const ButtonContainer = styled.button`
       border: 0.0625rem solid rgb(222, 222, 222);
     }
   }
-  :hover {
-    background-color: #54abff;
-    border-color: #54abff;
+
+  &:hover {
+    background-color: #578fca;
+    border-color: #578fca;
   }
 
-  :active {
+  &:active {
     background-color: #3c97f0;
     border-color: #3c97f0;
     box-shadow: 0 0 0 0.125rem ${({ theme }) => theme.colors.lightPrimary};
@@ -69,4 +70,4 @@ export const ButtonContainer = styled.button`
       line-height: 1.5rem;
     }
   }
-`
+`;

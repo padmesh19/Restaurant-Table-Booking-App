@@ -20,6 +20,7 @@ exports.getAllHotel = async (req, res) => {
     return res.status(400).json({ status: false, error: error.message });
   }
 };
+
 exports.getHotelById = async (req, res) => {
   try {
     const { hotelId } = req.params;
@@ -114,6 +115,7 @@ exports.getHotelMenuAndOfferById = async (req, res) => {
     return res.status(400).json({ status: false, error: error.message });
   }
 };
+
 exports.getHotelTableAndBookedById = async (req, res) => {
   try {
     const { hotelId } = req.params;
@@ -190,6 +192,7 @@ exports.getAllBooking = async (request, response) => {
     });
   }
 };
+
 exports.cancelBooking = async (req, res) => {
   try {
     const { bookingId } = req.params;

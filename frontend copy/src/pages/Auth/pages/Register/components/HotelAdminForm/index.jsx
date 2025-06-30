@@ -104,13 +104,12 @@ export const HotelAdminForm = ({
   );
 
   return (
-    <HotelAdminFormContainer className="align-items-center col-lg-12 col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+    <HotelAdminFormContainer className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
       <ErrorAlert isVisible={!!errorMessage} message={errorMessage} />
       <main className="d-flex flex-column main-content w-100">
-        <Spacer height="4rem" />
-        <div className="d-flex flex-column justify-content-center flex-grow-1">
+        <div className="d-flex flex-column justify-content-center flex-grow-1 gap-3">
           <BackLink
-            className="mb-3"
+            className="align-self-start p-0 gap-1"
             onClick={() => {
               clearLocalStorageValues();
               dispatch(setOrganisation(null));
@@ -118,22 +117,22 @@ export const HotelAdminForm = ({
             }}
           />
           <Heading
-            marginBottom="1rem"
             subtitle="Enter your details to create an account."
-            title={restaurantName}
+            title={restaurantName.toUpperCase()}
           />
           <form
-            className="align-items-center d-flex flex-column w-100"
+            autoComplete="off"
+            className="align-items-center d-flex flex-column w-100 gap-2"
             onSubmit={handleSubmit(onSubmit)}
           >
             <Controller
               control={control}
               name="name"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
                   autoFocus
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.name}
                   label="Full Name"
                   placeholder="Enter your full name"
@@ -143,10 +142,9 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="email"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="mb-3"
                   hasError={hasServerError || !!errors.email}
                   label="Email"
                   placeholder="Enter your email address"
@@ -156,10 +154,10 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="password"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.password}
                   label="Password"
                   placeholder="Enter a password"
@@ -170,10 +168,10 @@ export const HotelAdminForm = ({
             <Controller
               control={control}
               name="confirmPassword"
-              render={({field}) => (
+              render={({ field }) => (
                 <TextInput
                   {...field}
-                  className="input-fields mb-3"
+                  className="input-fields"
                   hasError={hasServerError || !!errors.confirmPassword}
                   label="Confirm Password"
                   placeholder="Confirm the password"
@@ -205,7 +203,6 @@ export const HotelAdminForm = ({
             text="Already have an account?"
           />
         </div>
-        <Spacer height="4rem" />
       </main>
     </HotelAdminFormContainer>
   );

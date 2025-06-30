@@ -14,16 +14,15 @@ export const ChooseAccountType = ({ onClickAccountType }) => {
   const [iconSchool, setIconSchool] = useState(false)
   const [iconTeacher, setIconTeacher] = useState(false)
   return (
-    <section className="align-items-center col-lg-12 col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+    <section className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
       <main className="d-flex flex-column main-content w-100">
         {/* <Spacer height="4rem" /> */}
-        <div className="d-flex flex-column justify-content-center flex-grow-1">
+        <div className="d-flex flex-column justify-content-center flex-grow-1 gap-4">
           <Heading
-            marginBottom="2rem"
             subtitle="Choose Create account type"
             title="Create Your Account"
           />
-          <div className="d-flex flex-column justify-content-between">
+          <div className="d-flex flex-column justify-content-between w-100 gap-3 pt-2">
             <AccountTypeButton
               buttonLabel="Hotel / Restaurant"
               onClick={() => onClickAccountType("Hotel")}
@@ -34,7 +33,6 @@ export const ChooseAccountType = ({ onClickAccountType }) => {
               iconHover={iconSchool}
             />
             <AccountTypeButton
-              className="mt-4"
               buttonLabel="User"
               onClick={() => onClickAccountType("User")}
               Icon={TeacherAccountIcon}
@@ -54,7 +52,7 @@ export const ChooseAccountType = ({ onClickAccountType }) => {
         {/* <Spacer height="4rem" /> */}
       </main>
     </section>
-  )
+  );
 }
 ChooseAccountType.propTypes = {
   onClickAccountType: PropTypes.func.isRequired,

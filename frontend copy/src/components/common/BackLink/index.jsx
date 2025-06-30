@@ -9,7 +9,7 @@ export const BackLink = ({ className, onClick }) => (
     className={classNames("align-items-center", "d-flex", className)}
     onClick={onClick}
   >
-    <img alt="Go Back" className="icon mr-2" src={ArrowLeftIcon} />
+    <img alt="Go Back" className="icon" src={ArrowLeftIcon} />
     <span className="text">Back</span>
   </BackLinkContainer>
 )

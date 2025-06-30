@@ -36,6 +36,7 @@ export const HotelListContainer = styled.div`
     width: 30%;
     border-radius: 0.75rem;
   }
+
   .header-container {
     display: flex;
     align-items: center;
@@ -61,3 +62,6 @@ export const HotelListContainer = styled.div`
     border-radius: 0.5rem !important;
   }
 `
+export const AddButton = styled.button`
+  background-color: #2f3645;
+`;

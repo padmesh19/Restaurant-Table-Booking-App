@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const AuthSwitchLinkContainer = styled.p`
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   .text {
     color: #def2f1;

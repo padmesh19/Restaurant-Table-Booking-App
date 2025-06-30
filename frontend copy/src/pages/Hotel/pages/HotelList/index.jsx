@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 // import { useNavigate } from "react-router"
 
 import { Card, AddMenuModal, EditFoodItemModal } from "./Components";
-import { HotelListContainer } from "./elements";
+import { HotelListContainer, AddButton } from "./elements";
 import {
   getHotelMenuList,
   hotelSelector,
@@ -132,6 +132,7 @@ export const HotelMenuList = () => {
             value={searchTerm}
             width="300px"
           />
+          <AddButton type="button">+ Add Menu</AddButton>
           <button
             className="add-Btn ml-2"
             type="button"
@@ -148,9 +149,11 @@ export const HotelMenuList = () => {
       {!isListLoading && data?.length ? (
         <div className="row">
           {data.map((item) => (
-            <div className="card-class col-sm-6 col-lg-4 col-md-3 col-xl-4 col-xs-6 col-12 mb-4">
+            <div
+              key={item?.menu_id}
+              className="card-class col-sm-6 col-lg-4 col-md-3 col-xl-4 col-xs-6 col-12 mb-4"
+            >
               <Card
-                key={item?.menu_id}
                 menuName={item?.menu_name}
                 itemType={item?.menu_type_name}
                 EditOnClick={() => {
@@ -185,7 +188,7 @@ export const HotelMenuList = () => {
         onSubmit={onSubmit}
         addUnits={addUnits}
         setAddUnits={setAddUnits}
-      /> 
+      />
       <EditFoodItemModal
         editDetails={editDetails}
         onHide={clearEditFoodDetails}

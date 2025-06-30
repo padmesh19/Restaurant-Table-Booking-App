@@ -61,44 +61,40 @@ export const ForgotPassword = () => {
   );
 
   return (
-    <div className="no-gutters row auth-container">
+    <div className="auth-container">
       <Helmet>
         <title>Forgot Password | Hotel</title>
       </Helmet>
       {/* <HeroSection /> */}
       <div className="auth-bg" />
-      <div className="auth-bg bg2" />
-      <div className="auth-bg bg3" />
-      <section className="align-items-center col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+      <section className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
         <ErrorAlert isVisible={!!errorMessage} message={errorMessage} />
         <main className="d-flex flex-column main-content w-100">
           {/* <Spacer height="4rem" /> */}
-          <div className="d-flex flex-column justify-content-center flex-grow-1">
+          <div className="d-flex flex-column justify-content-center flex-grow-1 gap-3">
             <BackLink
-              className="align-self-start back-link mb-4"
+              className="align-self-start p-0 gap-1"
               onClick={() => {
                 navigate(-1);
               }}
             />
             <Heading
-              marginBottom="2.5rem"
               subtitle="Enter your registered email below."
               title="Forgot Your Password?"
             />
             <form
-              className="align-items-center d-flex flex-column w-100"
+              className="align-items-center d-flex flex-column w-100 gap-3"
               onSubmit={handleSubmit(onSubmit)}
             >
               <Controller
                 control={control}
                 name="email"
-                render={({field}) => (
+                render={({ field }) => (
                   <TextInput
                     {...field}
                     autoFocus
                     className="input-fields mb-4"
                     hasError={hasServerError || !!errors.email}
-                    isLarge
                     label="Email"
                     placeholder="Enter email"
                   />

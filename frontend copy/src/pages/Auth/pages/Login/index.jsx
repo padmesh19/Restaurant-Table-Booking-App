@@ -16,6 +16,7 @@ import {
   // HeroSection,
 } from "../../components";
 import "../../elements/index.css";
+import StateDistrictSelector from "../../../../components/common/StateDistrictSelect";
 
 const FIELDS_IN_ORDER = ["email", "password"];
 
@@ -38,7 +39,7 @@ export const Login = () => {
 
   const onSubmit = useCallback(
     (data) => {
-      console.log(data)
+      console.log(data);
       dispatch(
         logIn(data, (userProfile) => {
           const isAdmin = userProfile?.user_type === 1;
@@ -60,21 +61,18 @@ export const Login = () => {
     FIELDS_IN_ORDER
   );
 
-
   return (
-    <div className="no-gutters row auth-container">
+    <div className="auth-container">
       <Helmet>
         <title>Login | Restaurant Table Booking</title>
       </Helmet>
       {/* <HeroSection /> */}
-      <div className="auth-bg" />
-      <div className="auth-bg auth-bg2 " />
-      <div className="auth-bg auth-bg3" />
-      <section className="align-items-center col-lg-12 col-md-12 d-flex flex-column justify-content-center main-section position-relative px-4">
+      <div className="auth-bg"></div>
+      <section className="main-section d-flex flex-column justify-content-center align-items-center position-relative p-4">
         <ErrorAlert isVisible={!!errorMessage} message={errorMessage} />
         <main className="d-flex flex-column main-content w-100">
           {/* <Spacer height="4rem" /> */}
-          <div className="d-flex flex-column justify-content-center flex-grow-1">
+          <div className="d-flex gap-3 flex-column justify-content-center flex-grow-1">
             <Heading
               subtitle="Enter your credentials to access your account."
               title="Welcome Back"

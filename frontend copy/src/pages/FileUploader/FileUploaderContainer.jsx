@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 export const FileUploadContainer = styled.div`
-  width: calc(100% - 20px);
+  width: 100%;
   border: 1px solid transparent;
-  border-radius: 2rem;
-  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, 0.4);
-  padding: 10px 5px;
+  border-radius: 0.25rem;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.4);
+  padding: 5px;
   margin: 1rem 0;
   display: flex;
   flex-direction: column;
@@ -40,13 +40,17 @@ export const FileUploadContainer = styled.div`
     }
   }
   .upload {
-    background-color: #f4a261;
+    background-color:rgb(255, 147, 59);
     color: white;
     font-weight: 500;
     padding: 0.5rem 0.5rem;
     border-radius: 0.25rem;
     outline: unset;
     border: unset;
+    padding: 5px 20px;
+  }
+  .upload:hover {
+    background-color: #f4a261;
   }
 
   .preview-container {
@@ -71,4 +75,4 @@ export const FileUploadContainer = styled.div`
     width: 60px;
     height: 60px;
   }
-`
+`;

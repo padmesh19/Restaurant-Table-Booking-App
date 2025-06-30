@@ -46,7 +46,7 @@ module.exports = {
       return next();
     }
 
-    res.set('WWW-Authenticate', 'Basic realm="junglecat Auth"');
+    res.set('WWW-Authenticate', 'Basic realm="dineDesk Auth"');
     return res.status(401).send('Authentication required.');
   },
 };

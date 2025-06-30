@@ -25,7 +25,7 @@ import {
 import { LoginRoute, PrivateRoute } from "./PrivateRoute"; // Assuming this is your wrapper for auth routes
 import ForgotPasswordOld from "./pages/ForgotPasswordOld";
 import ResetPassword from "./pages/PasswordReset";
-import Signup from "./pages/SignupOld";
+import RegisterSuccess from "./pages/RegisterSuccess";
 import ActivateUser from "./pages/ActivateUser";
 import { ForgotPassword, Login, Register } from "./pages/Auth/pages";
 import Root from "./App";
@@ -39,18 +39,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/login" replace />
+        element: <Navigate to="/login" replace />,
       },
       {
         path: "/customer",
         element: <PrivateRoute element={<Admin />} allowCustomer={true} />,
         children: [
           {
-            path:"",
+            path: "",
             element: <HotelListView />,
             children: [
-              {index:true, element: <HotelList/>},
-              { path: ":hotelId/view", element: <ViewHotel />  },
+              { index: true, element: <HotelList /> },
+              { path: ":hotelId/view", element: <ViewHotel /> },
               { path: ":hotelId/view-comments", element: <CommentsList /> },
               { path: ":hotelId/menu-offer", element: <MenuAndOfferHotel /> },
               { path: ":hotelId/book-table", element: <BookingTable /> },
@@ -97,9 +97,9 @@ const router = createBrowserRouter([
       },
       {
         path: "/register-success",
-        element: <LoginRoute element={<Signup />} />,
+        element: <LoginRoute element={<RegisterSuccess />} />,
       },
-    ]
+    ],
   },
 ]);
 

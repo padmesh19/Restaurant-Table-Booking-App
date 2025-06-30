@@ -4,11 +4,9 @@ import styled from "styled-components"
 import { Color } from "../../../../constants"
 
 export const Nav = styled.nav`
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0px 15px 10px -9px rgba(0, 0, 0, 0.1);
-  height: 80px;
-  /* background-color: #17252a; */
-  padding: 0 3.33% !important;
+  box-shadow: 0px 0px 5px -2px rgba(0, 0, 0, 0.1);
+  background-color: #2f3645;
+  padding: 0.5rem 2rem;
   transition: top 0.24s;
 
   @media (max-width: 50rem) {
@@ -35,11 +33,11 @@ export const Nav = styled.nav`
     }
   }
   span {
-    /* color: #afafaf; */
-    color: #3aafa9;
-    font-family: Inter;
+    color: #fc6066;
+    font-family: "Outfit", sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-size: 1.075rem;
+    font-weight: 600;
   }
 
   .ml-77 {
@@ -53,6 +51,14 @@ export const Nav = styled.nav`
   .text {
     color: #fff;
   }
+  .logo-img{
+  width:2rem;
+  }
+  .logo-text{
+  color:white;
+  font-size:1.25rem;
+  }
+
   .logoAndClass {
     @media (max-width: 50rem) {
       & {
@@ -198,7 +204,7 @@ export const Nav = styled.nav`
 
     &.is-open {
       border-color: ${Color.PRIMARY};
-      box-shadow: 0 0 0 2px ${Color.LIGHT_BLUE};
+      box-shadow: 0 0 5px 60px ${Color.PRIMARY};
     }
 
     .class-icon {
@@ -337,20 +343,19 @@ export const Nav = styled.nav`
   }
   button {
     &:focus {
+    border:none
       outline: none;
       box-shadow: none;
     }
   }
   .activeLink {
-    /* border-bottom-color: ${Color.PRIMARY} !important; */
     border-bottom-color: white !important;
     border-radius: 0;
 
     span {
-      /* color: ${Color.PRIMARY}; */
       color: white;
       line-height: 26px;
-      font-weight: 800;
+      font-weight: 700;
     }
   }
   .assessment-heading {
@@ -410,6 +415,7 @@ export const Nav = styled.nav`
     color: #aaaaaa;
     padding-left: 10px;
   }
+    
   .assessment-publish-btn {
     background: #40a1ff;
     border-radius: 8px;
@@ -543,6 +549,7 @@ export const Nav = styled.nav`
         line-height: 17px;
       }
     }
+
     .organisation-dropdown-item {
       padding: 10px 16px;
       align-items: center;
@@ -554,6 +561,7 @@ export const Nav = styled.nav`
       .dropdown-text {
         color: #3d4457;
         line-height: 17px;
+        font-size:0.90rem;
       }
     }
     :hover {
@@ -668,13 +676,18 @@ export const Nav = styled.nav`
   }
   .profile-btn {
     border-radius: 50%;
+    border:none;
+    &:hover{
+    box-shadow: 0 0 10px 1px #fc6066;
+    }
   }
   .cursor-pointer {
-    border: 1px solid #a5a5a5;
+    border: 2px solid #FFF;
     width: 48px;
     height: 48px;
     border-radius: 50%;
   }
+
   .profile-details {
     display: flex;
     flex-direction: row;
@@ -775,4 +788,4 @@ export const Nav = styled.nav`
     display: flex;
     align-items: center;
   }
-`
+`;

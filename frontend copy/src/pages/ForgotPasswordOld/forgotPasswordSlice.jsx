@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
-import forgotPassword from "../../api/authOld/forgotPassword"
+import { createSlice } from "@reduxjs/toolkit";
+import forgotPassword from "../../api/authOld/forgotPassword";
 
 export const forgotPasswordSlice = createSlice({
   name: "forgotPassword",
@@ -11,43 +11,43 @@ export const forgotPasswordSlice = createSlice({
   },
   reducers: {
     setErrorMessage: (state, action) => {
-      state.errorMessage = action.payload
+      state.errorMessage = action.payload;
     },
     setLoading: (state, action) => {
-      state.isLoading = action.payload
+      state.isLoading = action.payload;
     },
     setEmailSubmitted: (state, action) => {
-      state.isEmailSubmitted = action.payload
+      state.isEmailSubmitted = action.payload;
     },
     setUserData: (state, action) => {
-      state.userData = action.payload
+      state.userData = action.payload;
     },
   },
-})
+});
 
 export const { setEmailSubmitted, setErrorMessage, setUserData, setLoading } =
-  forgotPasswordSlice.actions
+  forgotPasswordSlice.actions;
 
 // sends a req to auth/forgot-password/recovery-email
 export const sendRecoveryEmail = (data, callback) => async (dispatch) => {
-  dispatch(setLoading(true))
+  dispatch(setLoading(true));
   try {
-    const resp = await forgotPassword(data)
+    const resp = await forgotPassword(data);
 
-    dispatch(setUserData(resp.data.user))
-    dispatch(setLoading(false))
-    dispatch(setEmailSubmitted(true))
-    dispatch(setErrorMessage(""))
+    dispatch(setUserData(resp.data.user));
+    dispatch(setLoading(false));
+    dispatch(setEmailSubmitted(true));
+    dispatch(setErrorMessage(""));
   } catch (err) {
-    callback(err.response)
-    dispatch(setLoading(false))
+    callback(err.response);
+    dispatch(setLoading(false));
     dispatch(
       setErrorMessage(err.response.data.message || err.response.data.error)
-    )
+    );
   }
-}
+};
 
 // state access fn's
-export const forgotPasswordSelector = (state) => state.forgotPassword
+export const forgotPasswordSelector = (state) => state.forgotPassword;
 
-export default forgotPasswordSlice.reducer
+export default forgotPasswordSlice.reducer;

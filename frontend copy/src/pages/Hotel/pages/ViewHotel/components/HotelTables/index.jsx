@@ -56,48 +56,54 @@ export const HotelTables = () => {
   const columns = useMemo(
     () => [
       {
-        Header: "#",
-        accessor: "serial",
+        id: "serial",
+        header: "#",
+        accessorKey: "serial",
         className: "serial",
       },
       {
-        Header: "Table Name",
-        accessor: "table_name",
+        id: "table_name",
+        header: "Table Name",
+        accessorKey: "table_name",
         className: "table-name",
       },
       {
-        Header: "Seat Count",
+        id: "table_seat_count",
+        header: "Seat Count",
         Cell: ({ value }) => (
           <div className="d-flex align-items-center">
             <div className="counts-present">{value}</div>
           </div>
         ),
-        accessor: "table_seat_count",
+        accessorKey: "table_seat_count",
         className: "seat-count",
       },
 
       {
-        Header: "Table Created At",
+        id: "table_created_at",
+        header: "Table Created At",
         Cell: ({ value }) => (
           <div className="total-count">
             {moment(value).format("DD MMM YYYY")}
           </div>
         ),
-        accessor: "table_created_at",
+        accessorKey: "table_created_at",
         className: "table-creation",
       },
       {
-        Header: "Booked Count",
+        id: "tableBookedCount",
+        header: "Booked Count",
         Cell: ({ value }) => (
           <div className="d-flex align-items-center">
             <div className="booked-counts">{value}</div>
           </div>
         ),
-        accessor: "tableBookedCount",
+        accessorKey: "tableBookedCount",
         className: "table-booking-count",
       },
       {
-        Header: "",
+        id: "more_option",
+        header: "More Options",
         Cell: ({ row: { original } }) => (
           <div className="align-items-center d-flex justify-content-center w-100">
             <MoreOptions>
@@ -122,7 +128,7 @@ export const HotelTables = () => {
             </MoreOptions>
           </div>
         ),
-        accessor: "courses",
+        accessorKey: "more_option",
         className: "more-option",
       },
     ],

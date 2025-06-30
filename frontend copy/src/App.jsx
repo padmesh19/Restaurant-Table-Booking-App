@@ -34,7 +34,7 @@ function Root() {
   return (
     <>
       <Helmet>
-        <title>Restaurant Table Booking</title>
+        <title>Dine Desk</title>
       </Helmet>
       <Outlet />
     </>
