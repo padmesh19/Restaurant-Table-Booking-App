@@ -1,9 +1,10 @@
-import styled, { css } from "styled-components"
+import styled, { css } from "styled-components";
 
 export const InputElementContainer = styled.div`
   border: 0.0625rem solid ${({ theme }) => theme.colors.border};
-  border-radius: 0.25rem;
+  border-radius: 0.375rem;
   overflow: hidden;
+
   transition: border-color 0.1s, box-shadow 0.1s;
 
   &.has-error {
@@ -15,16 +16,16 @@ export const InputElementContainer = styled.div`
   }
 
   &.is-focused {
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 0.125rem ${({ theme }) => theme.colors.lightPrimary};
+    box-shadow: 0px 0px 2px 0px #9559c1;
   }
 
   .text-input {
     border: none;
+    outline: none;
     color: ${({ theme }) => theme.colors.textDark};
     font-size: 0.875rem;
     line-height: 1.125rem;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 1rem;
 
     &.is-large {
       padding: 1.1875rem 1.5rem;
@@ -45,7 +46,7 @@ export const InputElementContainer = styled.div`
     border: none;
     right: 1.25rem;
     width: 1rem;
-    padding:0;
+    padding: 0;
 
     :active,
     :focus {
@@ -89,7 +90,7 @@ export const TextInputContainer = styled.div`
       : ""};
 
   .label {
-    color: ${({ theme }) => theme.colors.text};
+    color: #0a0a0a;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.05875rem;
@@ -102,4 +103,4 @@ export const TextInputContainer = styled.div`
     left: 0;
     line-height: 0.9075rem;
   }
-`
+`;

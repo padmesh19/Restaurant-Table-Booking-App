@@ -1,11 +1,11 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const OffersListContainer = styled.div`
   /* background-color: #3aafa9; */
   min-height: 100vh;
   padding: 7.0625rem 4rem 4.0625rem 4rem;
   .add-Btn {
-    background-color: #e63946;
+    background-color: #9559c1;
     border: unset;
     color: white;
     font-size: 0.875rem;
@@ -38,4 +38,4 @@ export const OffersListContainer = styled.div`
       }
     }
   }
-`
+`;

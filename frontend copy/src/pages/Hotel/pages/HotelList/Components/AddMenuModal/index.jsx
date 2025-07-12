@@ -1,26 +1,26 @@
 /* eslint-disable react/prop-types */
-import { yupResolver } from "@hookform/resolvers/yup"
-import PropTypes from "prop-types"
-import { useMemo, useCallback } from "react"
-import { Controller, useForm } from "react-hook-form"
-import { useDispatch, useSelector } from "react-redux"
+import { yupResolver } from "@hookform/resolvers/yup";
+import PropTypes from "prop-types";
+import { useMemo, useCallback } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   hotelSelector,
   clearFormError,
   setError as setServerError,
-} from "../../../../../../redux/HotelSlice"
+} from "../../../../../../redux/HotelSlice";
 
-import { useErrorMessage } from "../../../../../../utils/hooks"
-import { Select, TextInput } from "../../../../../../components/common"
-import CustomCancel from "../../../../../../components/shared/Buttons/CustomButton"
-import AddIcon from "../../../../../../assets/icons/addadmin.svg"
-import CloseIcon from "../../../../../../assets/icons/redcross.svg"
+import { useErrorMessage } from "../../../../../../utils/hooks";
+import { Select, TextInput } from "../../../../../../components/common";
+import CustomCancel from "../../../../../../components/shared/Buttons/CustomButton";
+import AddIcon from "../../../../../../assets/icons/addadmin.svg";
+import CloseIcon from "../../../../../../assets/icons/redcross.svg";
 
-import { foodDetailsSchema } from "../../../../../../utils/validation"
-import { AddMenuContainer } from "./elements"
+import { foodDetailsSchema } from "../../../../../../utils/validation";
+import { AddMenuContainer } from "./elements";
 
-const FIELDS_IN_ORDER = ["foodName", "menuType"]
+const FIELDS_IN_ORDER = ["foodName", "menuType"];
 
 export const AddMenuModal = ({
   onHide,
@@ -29,28 +29,33 @@ export const AddMenuModal = ({
   show,
   setAddUnits,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { control, formState: { errors }, handleSubmit, setValue } = useForm({
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    setValue,
+  } = useForm({
     defaultValues: {
       foodName: "",
       menuType: null,
     },
     resolver: yupResolver(foodDetailsSchema),
-  })
+  });
   const {
     error: serverError,
     menuType,
     formError,
     isListLoading,
-  } = useSelector(hotelSelector)
+  } = useSelector(hotelSelector);
 
   const clearServerError = useCallback(() => {
-    dispatch(setServerError(null))
-    dispatch(clearFormError())
-  }, [dispatch])
+    dispatch(setServerError(null));
+    dispatch(clearFormError());
+  }, [dispatch]);
 
-  useErrorMessage(errors, serverError, clearServerError, FIELDS_IN_ORDER)
+  useErrorMessage(errors, serverError, clearServerError, FIELDS_IN_ORDER);
 
   const dataOption = useMemo(
     () => [
@@ -61,7 +66,7 @@ export const AddMenuModal = ({
       })),
     ],
     [menuType]
-  )
+  );
   const onSubmitForm = useCallback(
     (data) => {
       setAddUnits((state) => [
@@ -70,15 +75,15 @@ export const AddMenuModal = ({
           menuType: data.menuType,
           foodName: data.foodName,
         },
-      ])
-      setValue("menuType", null)
-      setValue("foodName", "")
+      ]);
+      setValue("menuType", null);
+      setValue("foodName", "");
     },
     [setAddUnits, setValue]
-  )
+  );
   const removeItems = (position) => {
-    setAddUnits((state) => state.filter((item, index) => index !== position))
-  }
+    setAddUnits((state) => state.filter((item, index) => index !== position));
+  };
   return (
     <AddMenuContainer
       buttonLabel="Save"
@@ -91,6 +96,7 @@ export const AddMenuModal = ({
       title="Add food details"
       width="40rem"
       backdrop="static"
+      isDelete={false}
     >
       <form>
         <div className="form-container">
@@ -99,7 +105,7 @@ export const AddMenuModal = ({
               <Controller
                 control={control}
                 name="foodName"
-                render={({field}) => (
+                render={({ field }) => (
                   <TextInput
                     {...field}
                     autoComplete="off"
@@ -120,7 +126,7 @@ export const AddMenuModal = ({
               <Controller
                 control={control}
                 name="menuType"
-                render={({field}) => (
+                render={({ field }) => (
                   <Select
                     {...field}
                     hasError={!!errors.menuType}
@@ -135,38 +141,40 @@ export const AddMenuModal = ({
               />
             </div>
             <div className="field-right">
-              <CustomCancel
+              <button
                 className="save-changes"
-                bgColor="#fff"
-                padding="0.5rem 0.875rem"
                 onClick={handleSubmit(onSubmitForm)}
                 id="add-unit-button"
               >
                 <img src={AddIcon} alt="icon" />
-                <span className="add-button-text">Add</span>
-              </CustomCancel>
+                {/* <span className="add-button-text">Add</span> */}
+              </button>
             </div>
           </div>
         </div>
         {addUnits?.length ? (
           <>
-            <p className="text">{addUnits?.length} - added items</p>
+            <div className="add-items-count">
+              Added Food Items ({addUnits?.length})
+            </div>
             <div className="added-items-container">
               {addUnits?.map((item, position) => (
-                <div className="d-flex align-items-center justify-content-between">
-                  <div className="d-flex align-items-center justify-content-between">
-                    <p className="mr-5">{item.foodName}</p>
-                    <p>{item?.menuType?.label}</p>
+                <div className="d-flex align-items-center justify-content-between tags">
+                  <div className="d-flex align-items-center gap-1">
+                    <p className="mr-5 food-name">{item.foodName}</p>
+                    <div className="d-flex align-items-center gap-1 type">
+                      <p>{item?.menuType?.label}</p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          removeItems(position);
+                        }}
+                        className="closeIconBtn"
+                      >
+                        <img src={CloseIcon} alt="close" />
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      removeItems(position)
-                    }}
-                    className="closeIconBtn"
-                  >
-                    <img src={CloseIcon} alt="close" />
-                  </button>
                 </div>
               ))}
             </div>
@@ -174,10 +182,10 @@ export const AddMenuModal = ({
         ) : null}
       </form>
     </AddMenuContainer>
-  )
-}
+  );
+};
 
 AddMenuModal.propTypes = {
   onHide: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-}
+};

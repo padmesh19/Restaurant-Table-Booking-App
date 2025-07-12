@@ -1,11 +1,11 @@
-import classNames from "classnames"
-import PropTypes from "prop-types"
-import ReactBootstrapModal from "react-bootstrap/Modal"
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import ReactBootstrapModal from "react-bootstrap/Modal";
 
-import CloseModalIcon from "../../../assets/icons/refactor/close-modal.svg"
-import TrashIcon from "../../../assets/icons/refactor/trash.svg"
-import { Button } from "../Button"
-import { ModalContainer } from "./elements"
+import CloseModalIcon from "../../../assets/icons/refactor/close-modal.svg";
+import TrashIcon from "../../../assets/icons/refactor/trash.svg";
+import { Button } from "../Button";
+import { ModalContainer } from "./elements";
 
 export const Modal = ({
   buttonLabel,
@@ -53,7 +53,7 @@ export const Modal = ({
         </button>
       </header>
       {children}
-      <footer className="d-flex footer justify-content-end mt-4 p-4">
+      <footer className="d-flex footer justify-content-end mt-4 px-4 py-2">
         <Button
           className="button cancel-button mr-3"
           isFullWidth={false}
@@ -72,7 +72,7 @@ export const Modal = ({
       </footer>
     </ModalContainer>
   </ReactBootstrapModal>
-)
+);
 
 Modal.defaultProps = {
   children: null,
@@ -80,7 +80,7 @@ Modal.defaultProps = {
   isDelete: false,
   width: "",
   backdrop: "false",
-}
+};
 
 Modal.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
@@ -97,4 +97,4 @@ Modal.propTypes = {
   show: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   width: PropTypes.string,
-}
+};

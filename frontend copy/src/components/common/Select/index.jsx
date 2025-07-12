@@ -1,25 +1,25 @@
-import classNames from "classnames"
-import { AnimatePresence, motion } from "framer-motion"
-import PropTypes from "prop-types"
-import { forwardRef } from "react"
-import ReactSelect, { components } from "react-select"
+import classNames from "classnames";
+import { AnimatePresence, motion } from "framer-motion";
+import PropTypes from "prop-types";
+import { forwardRef } from "react";
+import ReactSelect, { components } from "react-select";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
-import BlueTickIcon from "../../../assets/icons/blue-tick.svg"
-import DropdownIndicatorIcon from "../../../assets/icons/refactor/dropdown-indicator.svg"
-import { theme } from "../../../elements"
-import { SelectContainer } from "./elements"
+import BlueTickIcon from "../../../assets/icons/blue-tick.svg";
+import DropdownIndicatorIcon from "../../../assets/icons/refactor/dropdown-indicator.svg";
+import { theme } from "../../../elements";
+import { SelectContainer } from "./elements";
 
 const STYLES = {
   control: (provided, state) => {
-    let borderColor = theme.colors.darkBorder
-    let boxShadowColor = theme.colors.lightPrimary
+    let borderColor = theme.colors.darkBorder;
+    let boxShadowColor = theme.colors.lightPrimary;
 
     if (state.selectProps.hasError) {
-      borderColor = theme.colors.danger
-      boxShadowColor = theme.colors.lightDanger
+      borderColor = theme.colors.danger;
+      boxShadowColor = theme.colors.lightDanger;
     } else if (state.isFocused) {
-      borderColor = theme.colors.primary
+      borderColor = theme.colors.primary;
     }
 
     return {
@@ -27,13 +27,14 @@ const STYLES = {
       "&:hover": {
         borderColor: theme.colors.darkBorder,
       },
-      border: `0.0625rem solid ${borderColor} !important`,
+      border: `0.0625rem solid #9559c1 !important`,
       borderRadius: "0.5rem",
       boxShadow: `${
-        state.isFocused ? `0 0 0 0.125rem ${boxShadowColor}` : "none"
+        state.isFocused ? `0px 0px 2px 0px #9559c1` : "none"
       } !important`,
+
       transition: "border-color 0.1s, box-shadow 0.1s",
-    }
+    };
   },
   indicatorSeparator: () => ({
     display: "none",
@@ -95,9 +96,9 @@ const STYLES = {
     ...provided,
     padding: state.selectProps.isLarge
       ? "1.1875rem 1.5rem"
-      : "0.75rem 0.5rem 0.75rem 1rem",
+      : "0.5rem 0.375rem 0.5rem 0.5rem",
   }),
-}
+};
 
 export const Select = forwardRef(
   (
@@ -120,7 +121,13 @@ export const Select = forwardRef(
     ref
   ) => (
     <SelectContainer
-      className={classNames("d-flex", "flex-column", "w-100", className)}
+      className={classNames(
+        "d-flex",
+        "flex-column",
+        "w-100",
+        "gap-2",
+        className
+      )}
       maxWidth={maxWidth}
       width={width}
     >
@@ -240,7 +247,7 @@ export const Select = forwardRef(
       </AnimatePresence>
     </SelectContainer>
   )
-)
+);
 
 Select.defaultProps = {
   className: "",
@@ -256,7 +263,7 @@ Select.defaultProps = {
   menuWidth: "100%",
   width: "",
   height: "18.75rem",
-}
+};
 
 Select.propTypes = {
   className: PropTypes.string,
@@ -272,4 +279,4 @@ Select.propTypes = {
   menuWidth: PropTypes.string,
   width: PropTypes.string,
   height: PropTypes.string,
-}
+};

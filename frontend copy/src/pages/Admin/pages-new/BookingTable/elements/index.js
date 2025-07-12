@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 export const BookingContainer = styled(motion.div)`
   background-color: #17252a;
   min-height: 100vh;
-  margin: 0 -0.9375rem;
+  // margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 4.0625rem 4rem;
   .select-date {
     color: white;

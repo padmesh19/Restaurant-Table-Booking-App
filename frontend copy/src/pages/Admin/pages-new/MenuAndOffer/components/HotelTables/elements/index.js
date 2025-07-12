@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const AllMenuContainer = styled.div`
   /* background-color: #17252a; */
   min-height: 100%;
-  margin: 0 -0.9375rem;
+  // margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 2.0625rem 4rem;
   .title {
     color: white;

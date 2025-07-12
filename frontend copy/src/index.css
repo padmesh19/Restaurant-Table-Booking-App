@@ -27,7 +27,7 @@ body {
   margin: 0;
   padding: 0;
   height: auto;
-  font-family: 'Times New Roman',Helvetica, Arial, sans-serif;
+  font-family: "Times New Roman", Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -67,8 +67,6 @@ button:focus-visible {
   }
 }
 
-
-
 /* @import url("https://rsms.me/inter/inter.css"); */
 
 html,
@@ -85,6 +83,7 @@ body {
 
 body {
   margin: 0;
+  background-color: #fff !important;
 }
 
 code {

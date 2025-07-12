@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const AdminListingPageContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   min-height: 100%;
-  margin: 0 -0.9375rem;
+  // margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 4.0625rem 4rem;
   @media (max-width: 55.5rem) {
     & {

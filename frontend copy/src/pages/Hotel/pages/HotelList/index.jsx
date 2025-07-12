@@ -113,7 +113,7 @@ export const HotelMenuList = () => {
     <HotelListContainer>
       <div className="header-container">
         <header>Menu List</header>
-        <div className="d-flex">
+        <div className="d-flex gap-3">
           <div className="category mr-2">
             <Select
               isLarge={false}
@@ -132,7 +132,6 @@ export const HotelMenuList = () => {
             value={searchTerm}
             width="300px"
           />
-          <AddButton type="button">+ Add Menu</AddButton>
           <button
             className="add-Btn ml-2"
             type="button"
@@ -140,7 +139,7 @@ export const HotelMenuList = () => {
               setShow(true);
             }}
           >
-            + Add Menu
+           Add Menu
           </button>
         </div>
       </div>

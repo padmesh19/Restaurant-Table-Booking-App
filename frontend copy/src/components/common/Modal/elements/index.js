@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const ModalContainer = styled.div`
   ${({ width }) => (width ? `width: ${width};` : "")}
@@ -17,7 +17,7 @@ export const ModalContainer = styled.div`
       .title {
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
-        color: ${({ theme }) => theme.colors.text};
+        color: #9559c1;
         display: -webkit-box !important;
         font-size: 1.5rem;
         font-weight: 500;
@@ -55,7 +55,7 @@ export const ModalContainer = styled.div`
   }
 
   .footer {
-    border-top: 0.0625rem solid ${({ theme }) => theme.colors.border};
+    // border-top: 0.0625rem solid ${({ theme }) => theme.colors.border};
 
     .button {
       padding: 0.875rem 1.25rem;
@@ -95,4 +95,4 @@ export const ModalContainer = styled.div`
       }
     }
   }
-`
+`;

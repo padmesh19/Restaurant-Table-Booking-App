@@ -8,7 +8,7 @@ const AccountTypeButtonContainer = styled.button`
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   outline: none;
-  background: linear-gradient(to bottom, #7cb8fd 50%, #fff 50%);
+  background: linear-gradient(to bottom, #fc6066 50%, #fff 50%);
   background-position: bottom;
   background-size: 100% 200%;
   transition: all 0.25s ease-in-out;
@@ -35,7 +35,7 @@ const AccountTypeButtonContainer = styled.button`
     justify-content: center;
     .icon-container {
       width: 2rem;
-      height:2rem;
+      height: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -58,7 +58,7 @@ const AccountTypeButtonContainer = styled.button`
   @media (max-width: 22rem) {
     width: 18rem;
   }
-`
+`;
 
 export const AccountTypeButton = ({
   onClick,

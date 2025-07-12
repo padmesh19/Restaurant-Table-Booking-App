@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-import { Color } from "../../../constants"
+import { Color } from "../../../constants";
 
 export const SearchInputContainer = styled.div`
   align-items: center;
@@ -8,7 +8,7 @@ export const SearchInputContainer = styled.div`
   border: 1px solid #dedede;
   border-radius: 8px;
   display: flex;
-  height: 2.75rem;
+  height: 2.5rem;
   overflow: hidden;
   padding: 0 0 0 11px;
   transition: border-color 0.1s, box-shadow 0.1s;
@@ -51,4 +51,4 @@ export const SearchInputContainer = styled.div`
       color: ${Color.LIGHT_TEXT};
     }
   }
-`
+`;

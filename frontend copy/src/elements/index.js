@@ -1,9 +1,9 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 export const theme = {
   colors: {
-    background: "#f4f5f8",
-    border: "#FFFCFB",
+    background: "#d3d3d3",
+    border: "#9559c1",
     danger: "#eb5757",
     dangerButtonActive: "#cc5454",
     dangerButtonHover: "#ff8787",
@@ -13,9 +13,9 @@ export const theme = {
     lighterPrimary: "#ecf6ff",
     lightDanger: "#ebc6be",
     lightPrimary: "#cfe7ff",
-    lightText: "#98A1BC",
+    lightText: "#5a5a5a",
     placeholder: "#c0c0c0",
-    primary: "#3674B5",
+    primary: "#fc6066",
     primaryAlt: "#5ba1f2",
     text: "#F4EBD3",
     textDark: "#2A1458",
@@ -82,4 +82,4 @@ export const GlobalStyles = createGlobalStyle`
       transform: rotate(360deg);
     }
   }
-`
+`;

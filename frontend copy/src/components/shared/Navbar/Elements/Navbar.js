@@ -1,12 +1,12 @@
-import styled from "styled-components"
+import styled from "styled-components";
 /* eslint-disable import/prefer-default-export */
 
-import { Color } from "../../../../constants"
+import { Color } from "../../../../constants";
 
 export const Nav = styled.nav`
-  box-shadow: 0px 0px 5px -2px rgba(0, 0, 0, 0.1);
-  background-color: #2f3645;
-  padding: 0.5rem 2rem;
+  box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 0.5rem 2rem 0rem 0.2rem;
   transition: top 0.24s;
 
   @media (max-width: 50rem) {
@@ -30,10 +30,11 @@ export const Nav = styled.nav`
     &.active {
       background-color: #ecf6ff !important;
       border-radius: 8px;
+      
     }
   }
   span {
-    color: #fc6066;
+    color: #9559c1;
     font-family: "Outfit", sans-serif;
     font-style: normal;
     font-size: 1.075rem;
@@ -349,11 +350,11 @@ export const Nav = styled.nav`
     }
   }
   .activeLink {
-    border-bottom-color: white !important;
+    border-bottom-color: #9559c1 !important;
     border-radius: 0;
 
     span {
-      color: white;
+      color: #9559c1;
       line-height: 26px;
       font-weight: 700;
     }

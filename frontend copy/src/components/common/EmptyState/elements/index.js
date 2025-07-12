@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const EmptyStateContainer = styled.div`
   padding: 5.6875rem 0 3.5rem 0;
@@ -10,7 +10,7 @@ export const EmptyStateContainer = styled.div`
   }
 
   .title {
-    color: ${({ theme }) => theme.colors.text};
+    color: #9559c1;
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.8125rem;
@@ -25,4 +25,4 @@ export const EmptyStateContainer = styled.div`
   .button-container {
     margin-top: 1rem;
   }
-`
+`;

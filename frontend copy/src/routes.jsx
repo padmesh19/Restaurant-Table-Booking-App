@@ -29,7 +29,6 @@ import RegisterSuccess from "./pages/RegisterSuccess";
 import ActivateUser from "./pages/ActivateUser";
 import { ForgotPassword, Login, Register } from "./pages/Auth/pages";
 import Root from "./App";
-import { element } from "prop-types";
 import HotelListView from "./pages/Admin/pages-new/HotelListView";
 
 const router = createBrowserRouter([

@@ -1,9 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const CommentsListContainer = styled.div`
   /* background-color: #3aafa9; */
   min-height: 100vh;
-  margin: 0 -0.9375rem;
+  // margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 4.0625rem 4rem;
   .header-container {
     display: flex;
@@ -41,4 +41,4 @@ export const CommentsListContainer = styled.div`
     margin-right: 1rem;
     border-radius: 0.3rem;
   }
-`
+`;

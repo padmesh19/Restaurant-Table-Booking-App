@@ -15,7 +15,7 @@ export const SelectContainer = styled.div`
     `};
 
   .label {
-    color: ${({ theme }) => theme.colors.text};
+    color: #0a0a0a;
     font-size: 0.875rem;
     font-weight: 500;
     line-height: 1.05875rem;
@@ -76,8 +76,7 @@ export const SelectContainer = styled.div`
   }
 
   .react-select__control--is-focused {
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 0.125rem ${({ theme }) => theme.colors.lightPrimary};
+    box-shadow: 0px 0px 2px 0px #9559c1;
   }
 
   .react-select__control--is-focused.has-error {

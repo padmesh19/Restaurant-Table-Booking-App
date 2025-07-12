@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const CalenderContainer = styled.div`
   /* background-color: #3aafa9; */
@@ -6,7 +6,7 @@ export const CalenderContainer = styled.div`
   padding: 7.0625rem 4rem 7rem 4rem;
 
   .add-Btn {
-    background-color: #f77f00;
+    background-color: #9559c1;
     border: unset;
     color: #000;
     font-size: 1rem;
@@ -44,4 +44,4 @@ export const CalenderContainer = styled.div`
     border-radius: 0.5rem;
     overflow: hidden;
   }
-`
+`;

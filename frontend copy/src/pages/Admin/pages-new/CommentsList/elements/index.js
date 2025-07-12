@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const CommentsListContainer = styled.div`
   background-color: #f4f5f8;
   min-height: 100vh;
-  margin: 0 -0.9375rem;
+  // margin: 0 -0.9375rem;
   padding: 7.0625rem 4rem 4.0625rem 4rem;
   .header-container {
     display: flex;
